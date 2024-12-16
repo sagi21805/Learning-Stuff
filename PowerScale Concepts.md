@@ -43,7 +43,7 @@ PowerScale is the industry's leading Scale-Out clustered solution. It provides a
 - Unmatched efficiency 
 - Simple to use and manage
 - Scales Linearly
-### PowerScale Nodes
+## PowerScale Nodes
 PowerScale has multiple servers that are called **Nodes** which combine to create a **cluster**. Each cluster behaves as a single, central storage system. 
 - PowerScale Nodes are designed for large volumes of unstructured data
 
@@ -57,7 +57,89 @@ Next in term of computing power are these nodes. These are highly adaptable hybr
 #### <u>A-Series</u>
 These nodes namely have lesser computer power compared to other nodes and are designed for data archival purposes. This can be combined with other nodes to create efficient tiered storage solutions.
 
-#### PowerScale Features
+### PowerScale Features
 - <u>Cyber resiliency and security</u> - OneFS Zero Trust Model for security, 256-bit encryption, SmartLock for immutability, ransomware attack prevention, detection and recovery, air gap protection.
 - <u>High performance and scalability</u> - Low latency with NVMe-based all-flash "F"nodes, scale up to up to 252 nodes, tens of petabytes and almost 1 TB/sec of bandwidth under a single unified namespace.
-- <u>Software defined deployment flexibility</u> - Deploy as an appliance, on selected Intel x86-based servers  
+- <u>Software defined deployment flexibility</u> - Deploy as an appliance, on selected Intel x86-based servers
+- <u>Self-Encrypting Drivers (SEDs)</u> - Self encrypting drives securely store confidential data over its lifetime. It is used in regulated verticals-Federal governments; Financial services; Healthcare (HIPPA). PowerScale implements Data at rest Encryption using SEDs.
+### Node Interconnectivity
+PowerScale nodes can use either an InfiniBand or an Ethernet connection for the backend. InfiniBand was designed as a high speed interconnect for high-performance computing, and Ethernet provides the flexibility and high speed that sufficiently support the PowerScale internal communication.
+### Quick Scalability 
+The primary purpose of a NAS approach is the **Scale-Out** part. An administrator can expend the storage and compute by adding a new node
+In PowerScale, once the node is racked and cabled, adding it to the cluster takes just a few minutes because OneFS policies automatically discover the node, set up addresses for the node, incorporate the node into the cluster, and begin rebalancing capacity on all nodes. 
+
+## PowerScale Networking Architecture
+### Networking Architecture 
+OneFS supports standard network communication protocols IPv4 and IPv6. PowerScale nodes include several external Ethernet connection options, providing flexibility for a wide variety of network configurations
+### Type of Networks
+### <u>Frontend => External Network</u>
+Clients connect to the cluster using Ethernet connections that are available on all nodes. The complete cluster is combined with hardware, software and networks.
+### <u>Backend => Internal Network</u>
+OneFS supports a single cluster on the internal network. This backend network, which is configured with redundant switches for high availability acts as the back-plane for the cluster
+
+![[Pasted image 20241216115043.png]]
+
+### Interconnect
+<u>Backend Network</u> - This backend network is a private PowerScale network that is used for inter-cluster communication.
+<u>InfiniBand</u> - This is a high-speed unmanaged fabric. that supports Gen 5 and Gen 6 Nodes.
+<u>Ethernet</u> - High speed managed fabric with limited monitoring capabilities, supports Gen 6 nodes. the minimum switch size is 24 ports
+### Leaf and Spine 
+- Two level hierarchy
+- Cluster nodes connect to leaf switches which communicate with each other using the spine switches
+- Switches are not interconnected - switches of the same type (leaf or spine) do not connect to one another
+- Each leaf switch connects with all spine switches
+- All leaf switches have the same number of up-links to the spine switches
+## PowerScale OneFS Operating System
+### OneFS - Distributed Clustered File System
+- OneFS runs on all nodes. Nodes work as peers
+- Grows dynamically 
+- No primary node that controls the cluster
+- Supports variable fault tolerance levels
+- Runs on all nodes. Each node is a peer. Prevents bottle necking
+
+### Benefits of OneFS
+The OneFS architecture is designed to optimize processes an applications across the cluster
+- <u>concurrency</u> - When a node is added to the cluster, it adds computing power, storage, caching, and networking resources.
+- Shared infrastructure -
+	- Access to resources on any node in the cluster from any other node in the cluster
+	- Performance benefits of parallel processing.
+
+- Improved utilization of resources - compute, disk, memory, networking
+- Because all nodes work together, the mode nodes, the more the cluster gets more powerful.
+
+### Multi-protocol File Access
+![[Pasted image 20241216144309.png]]
+
+OneFS supports access to the same file using different protocols and authentication methods simultaneously. SMB clients that authenticate using Active Directory (AD), and NFS clients that authenticate using LDAP, can access the same file with their appropriate permissions applied.
+
+- OneFS translates Windows Security Identifiers (SIDs) and UNIX User Identities (UIDs) into common identity format.
+- Permission activities are transparent to the client
+
+### Authentication
+- Authentication services offer a layer of security by verifying user credentials before allowing access ti the files.
+- Ensure that interactions between authentication types are understood before enabling multiple methods on the cluster.
+#### <u>SSH</u>
+SSH multi-factor authentication supported
+#### <u>AD</u> 
+Active Directory can serve many functions, but the primary reason for joining the cluster to an Active Directory domain in to perform user authentication. This is Microsoft implementation of LDAP
+#### <u>LDAP</u>
+Networking protocol that enables you to define, query, and modify directory services and resources.
+#### <u>Network Information Service</u>
+This service provides authentication and identity uniformity across local area networks. OneFS includes NIS authentication.
+#### <u>File Provider</u>
+Enables to supply an authoritative third-party source of user information to the cluster. This is useful to sync the /etc/passwd, and /etc/group files across servers
+
+### Policy Based Automation
+- Automated policies make processes repeatable, decreasing the time spent manually managing the cluster
+- Executes policies as a cohesive system
+- Policies drive every process
+
+### Management Interfaces
+The OneFS management interface is used to perform various administrative and management tasks on the PowerScale cluster and nodes. Management capabilities vary based on which interface is used.
+
+- <u>Serial Console</u> - Initial cluster configuration
+- <u>Web Interface</u> - Graphical monitoring displays, and management tasks
+- <u>Command Line Interface</u> - configure, monitor, manage with 'isi'
+- <u>Platform Application Programming Interface</u> - operations on cluster
+- <u>Front Panel Display</u> - basic administrative tasks on site.
+
