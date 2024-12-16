@@ -1,0 +1,189 @@
+{
+  "main": {
+    "id": "32d14122ab0d17d0",
+    "type": "split",
+    "children": [
+      {
+        "id": "792d43c7db3262f9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a9499462f160d0b9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "PowerScale Concepts.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "PowerScale Concepts"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b6e7b55ec95c0c2e",
+    "type": "split",
+    "children": [
+      {
+        "id": "fbf6abe4af3ee569",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3aea1d7bcd998ce3",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "2776378f64a7dcb7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "f7aee1b94aacaa5b",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d7625e987285e65d",
+    "type": "split",
+    "children": [
+      {
+        "id": "189a51df68661a62",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cd1c09e6a3f85298",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "PowerScale Concepts.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for PowerScale Concepts"
+            }
+          },
+          {
+            "id": "75e40a24c015701f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "PowerScale Concepts.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from PowerScale Concepts"
+            }
+          },
+          {
+            "id": "c4faad3c2457ce3b",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "c85f83d263819f28",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "PowerScale Concepts.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of PowerScale Concepts"
+            }
+          },
+          {
+            "id": "5bcac7f5b4738a05",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "a9499462f160d0b9",
+  "lastOpenFiles": [
+    "PowerScale Concepts.md",
+    "2024-12-16.md",
+    "2024-12-15.md",
+    "Images/Pasted image 20241215140544.png",
+    "Images",
+    "Images/Pasted image 20241215142035.png",
+    "Images/Pasted image 20241215141938.png",
+    "Untitled 2.md",
+    "Untitled.canvas",
+    "Untitled 1.md"
+  ]
+}
