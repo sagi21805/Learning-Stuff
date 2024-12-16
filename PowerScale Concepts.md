@@ -60,4 +60,4 @@ These nodes namely have lesser computer power compared to other nodes and are de
 #### PowerScale Features
 - <u>Cyber resiliency and security</u> - OneFS Zero Trust Model for security, 256-bit encryption, SmartLock for immutability, ransomware attack prevention, detection and recovery, air gap protection.
 - <u>High performance and scalability</u> - Low latency with NVMe-based all-flash "F"nodes, scale up to up to 252 nodes, tens of petabytes and almost 1 TB/sec of bandwidth under a single unified namespace.
-- Changes
+- <u>Software defined deployment flexibility</u> - Deploy as an appliance, on selected Intel x86-based servers  
