@@ -4,17 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "792d43c7db3262f9",
+        "id": "3fc672b413a2bdbe",
         "type": "tabs",
         "children": [
           {
-            "id": "a9499462f160d0b9",
+            "id": "fd8be52060128b72",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "image",
+              "state": {
+                "file": "Images/Pasted image 20241217143939.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20241217143939"
             }
           }
         ]
@@ -134,9 +136,11 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {},
+              "state": {
+                "file": "Images/Pasted image 20241217143939.png"
+              },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Pasted image 20241217143939"
             }
           },
           {
@@ -167,11 +171,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a9499462f160d0b9",
+  "active": "3aea1d7bcd998ce3",
   "lastOpenFiles": [
+    "Images/Pasted image 20241217122912.png",
     "PowerScale Concepts.md",
-    "Pasted image 20241216144309.png",
-    "Pasted image 20241216115043.png",
+    "Images/Pasted image 20241217143939.png",
+    "Practical Malware Analysis - Summary.md",
+    "Images/Pasted image 20241216195410.png",
+    "Images/Pasted image 20241216195351.png",
+    "Images/Pasted image 20241216144309.png",
+    "Images/Pasted image 20241216115043.png",
     "access_token",
     "Untitled.canvas",
     "2024-12-16.md",

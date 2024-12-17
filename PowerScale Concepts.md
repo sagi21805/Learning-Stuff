@@ -143,3 +143,89 @@ The OneFS management interface is used to perform various administrative and man
 - <u>Platform Application Programming Interface</u> - operations on cluster
 - <u>Front Panel Display</u> - basic administrative tasks on site.
 
+### Role Based Access Control
+- Set of global admin privileges 
+- Five pre-configured admin roles
+- Allows to create roles that manage security
+### SmartSync
+OneFS provides a Data-mover also called SmartSync. This enables to transfer data between PowerScale cluster and S3 object stores (ECS, AWS). This data-mover provides protection, repurposing and archiving 
+
+### File Filtering
+
+Administrators can allow or deny access to specified file extension depending on the restriction policy. It prevents writing new files to the cluster ad denies access to existing ones.
+
+### Internal Monitoring
+#### Healthcheck Tool
+This is a tool that helps evaluate the cluster health status and it provides alerts to potential issues. This tool can be used to manage risk, reduce support cycles, and resolution times as well as improving uptime.
+
+#### Statistics and Status Commands
+There are three main commands
+- <u>isi statistics</u> - This is a command that has approximately 1500 combinations of data that you can display as statistical output of the cluster. The statistics are collected and stored in a sqlite3 database that is under the /ifs folder on the cluster. This command provides protocol, drive, hardware, and node statistics.   
+- <u>isi devices</u> - Displays information about devices in the cluster and changes their status. Multiple actions are available including adding drivers to cluster nodes. 
+- <u>isi status</u> - Command displays information about the status of the cluster, alerts and jobs. This command status gives a general status, performance metrics, critical alerts, and Job Engine status.
+
+#### Events and Alerts
+- Events can be created, and when a specified event occurs an alerts pops. There is a cluster event log, the processes, monitors, logs, and reports the important activities, and error conditions on the nodes and cluster.
+- Alert => Event that describes a change that has occurred in an event group
+#### SNMP
+- Used to remotely monitor the PowerScale hardware components, such as fans, hardware sensors, power supplies, and disks. 
+
+#### Secure Remote Services
+- Monitors the PowerScale cluster on a node-by-node basis, sending alerts regarding the health of the devices.
+- Provides secure IP-based customer service support system that provides 24x7 remote monitoring, secure authentication with AES 256-bit encryption and RSA certificates.
+#### Logs and Auditing
+- Logs are the source of information for troubleshooting issues on the cluster. The log entries provide detailed about the operating system, file system, entire cluster and on node level including health, status, events, and error conditions
+- Auditing is the ability to log specific activities on the cluster. 
+- Auditing provides the capability to track whether the data was accessed, modified, created or deleted. 
+#### UNIX Tools 
+- <u>iostat</u> - is a common UNIX tool that collects and displays various system statistics, most notably about I/O rates. 
+- <u>netstat</u> - is a tool for monitoring anything relating to the network of a system. Like _iostat_ and _tcpdump_, this command is present on may UNIX and UNIX like systems. Common options are routing table, and  the active listing sockets.
+
+### External Monitoring
+
+#### IOZone 
+This is an open-source bench-marking tool. It runs on various platforms, including Window, Linux, and various UNIX operating systems. It runs from a client machine and measures actual I/O of the device. mostly used to a Direct Attached Storage.
+#### DataIQ
+Dataset management functionality and storage monitoring capabilities for PowerScale clusters. It provides tools to monitor and analyze the cluster.
+#### InsightIQ
+Provides tools to monitor and analyze historical data from PowerScale and Isilon clusters. 
+#### Live Optics
+Collects and analyzes data from operating systems, hardware, and virtual environments. It streams configuration and performance data from the data center of the customer to an online analytics engine, which then measures, analyzes, and blends workload characteristics.
+#### Iometer 
+Third party tool the is designed for I/O performance testing on Windows systems. 
+#### Iperf
+Common tool that administrators use for validating network throughput. This can run both from the client to the server 
+### Storage Pools Overview
+A storage pool is an abstraction that encompasses disk pools, node pools, and tiers. Storage pools segment nodes and files into logical divisions to simplify the management and storage of data
+
+- Disk pool is the smallest unit of a storage pool
+- Node pool is a group of three or more equivalent nodes that form a single pool
+- Tiers are user-defined groups of nodes the are combined to optimize data storage by need, such as high-speed tier for data that needs a greater I/O
+
+The _SmartPools_ module groups nodes and files into pools. 
+
+### Forward Error Correction
+This is a technique that is used for controlling errors in data transmission at high speeds. The destination recognizes only the data with no errors from the source that sending redundant error correcting code with the data frame.
+
+N+1 protection, says that data is 100% available even if a drive or nodes fail. N+K provides protection to K failures.
+
+During write operation with OneFS, the file from the client is striped across the nodes. The system breaks the file-based data into smaller logical units of fixed size.
+![[Pasted image 20241217122912.png]]
+
+
+
+### Access Zones
+Carve out access to a PowerScale cluster creating boundaries for multitenancy or multiprotocol. Access Zones permit or deny access to areas of the cluster. At access zone level, authentication providers are also provisioned. Access zones provide greater security as administration, and file access is limited to a subset of the cluster, rather then the entire cluster.
+The default view is one zone, and the cluster can be partitioned into multiple virtual containers called access zones.
+
+### Network Isolation Security
+#### Multitenancy
+- This is the ability to host multiple organizations in a single cloud application, or storage device. Each organization in the environment is called a tenant.
+- Each group within an organization can have it's own separate zone without compromising security.
+- In a multitenant scenario, the solution must treat each business unit as separate and unique with access to the cluster. 
+
+#### Groupnets
+Reside at the top tier of the networking hierarchy and are the configuration level for managing on external network. 
+This is a container that includes a subnet, IP address pool, and provisioning rules. Groupnets allow separate access zones to contain district DNS settings
+![[Pasted image 20241217143939.png]]
+
