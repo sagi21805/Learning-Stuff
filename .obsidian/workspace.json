@@ -11,12 +11,14 @@
             "id": "fd8be52060128b72",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "Images/Pasted image 20241217143939.png"
+                "file": "PowerScale Concepts.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "Pasted image 20241217143939"
+              "icon": "lucide-file",
+              "title": "PowerScale Concepts"
             }
           }
         ]
@@ -137,10 +139,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Images/Pasted image 20241217143939.png"
+                "file": "PowerScale Concepts.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Pasted image 20241217143939"
+              "title": "Outline of PowerScale Concepts"
             }
           },
           {
@@ -171,12 +173,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3aea1d7bcd998ce3",
+  "active": "fd8be52060128b72",
   "lastOpenFiles": [
-    "Images/Pasted image 20241217122912.png",
-    "PowerScale Concepts.md",
-    "Images/Pasted image 20241217143939.png",
     "Practical Malware Analysis - Summary.md",
+    "ISM.pdf",
+    "Linux.pdf",
+    "Networking.pdf",
+    "PowerScale Concepts.md",
+    "linux.md",
+    "Images/Pasted image 20241217143939.png",
+    "Images/Pasted image 20241217122912.png",
     "Images/Pasted image 20241216195410.png",
     "Images/Pasted image 20241216195351.png",
     "Images/Pasted image 20241216144309.png",

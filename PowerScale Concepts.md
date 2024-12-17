@@ -229,3 +229,22 @@ Reside at the top tier of the networking hierarchy and are the configuration lev
 This is a container that includes a subnet, IP address pool, and provisioning rules. Groupnets allow separate access zones to contain district DNS settings
 ![[Pasted image 20241217143939.png]]
 
+#### Subnets
+- Networking containers that enable to subdivide the network into smaller, logical IP networks.
+- On a cluster, subnets are created under a groupnet and each subnet contains one or more IP address pool.
+- OneFS supports both IPv4 and IPv6, but not a combination
+- Setting up the external network subnets depends 
+
+## Data Management and Security 
+
+### Data I/O Optimization
+You can optimize data I/O to match the workflows for your business, By default, optimization is managed cluster-wide, but you can manage individual directories or individual files.
+Data access pattern can be optimized for random access, sequential access, or concurrent access. For example sequential access have massive pre-fetching, Random disables pre-fetching for data and metadata, .
+<u>Pre-fetch</u> - This is an optimization that is trying to predict the next data that is read before the user tries to, so when does it has already been read an on cache.
+
+#### Data Protection for Simultaneous Failures
+Following performance optimization, customers often recognize data protection as the second most crucial feature of the cluster.
+The protection level is the number of components in a cluster that can malfunction without loss of data.
+For extra protection, high forward error correction can be selected, and virtual hot sphere can be defined.
+<u>Virtual Hot Sphere</u> - allocated disk space to hold data as it is rebuilt when a driver fails.
+
