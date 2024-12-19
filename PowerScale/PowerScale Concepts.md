@@ -242,9 +242,87 @@ You can optimize data I/O to match the workflows for your business, By default, 
 Data access pattern can be optimized for random access, sequential access, or concurrent access. For example sequential access have massive pre-fetching, Random disables pre-fetching for data and metadata, .
 <u>Pre-fetch</u> - This is an optimization that is trying to predict the next data that is read before the user tries to, so when does it has already been read an on cache.
 
-#### Data Protection for Simultaneous Failures
+### Data Protection for Simultaneous Failures
 Following performance optimization, customers often recognize data protection as the second most crucial feature of the cluster.
 The protection level is the number of components in a cluster that can malfunction without loss of data.
 For extra protection, high forward error correction can be selected, and virtual hot sphere can be defined.
 <u>Virtual Hot Sphere</u> - allocated disk space to hold data as it is rebuilt when a driver fails.
+
+### User Quotas for Capacity Management
+You can subdivide capacity usage by assigning storage quotas to users, groups, and directories.
+- Policy based quota management
+- <u>Nesting</u> - place a quota for a department, then inside it a smaller one for department user.
+- <u>Thin Provisioning</u> - shows the available storage even if capacity is not available.
+
+#### Quota Types 
+- <u>Accounting</u> - informational only, can exceed quota.
+- <u>Soft Enforcing</u> - Notification is send when exceeded.
+- <u>Hard Enforcing</u> - deny writes
+
+### Deduplication for Data Efficiency
+Deduplication provides an automated way to increase storage efficiency. 
+OneFS find duplicate sets of data blocks, and then stores only a single copy of any data block
+- This method Consolidates duplicate data blocks 
+- <u>Post process</u> - analyzes data that is already stored
+- Block level duplication, at the 8-K block level on files over 32 KB
+
+### Data Visibility and Analytics
+InsightIQ is a powerful tool that monitors one or more clusters and presents the data in a robust graphical interface with reports which can be exported. 
+
+It offers:
+- Monitoring system usage, performance and files
+- Requires a sever or VMware system external to the cluster
+- Free license
+### Data Integrity - FEC Protection
+Each stripe is protected separately with forward error correction (FEC) protection blocks, or parity
+- Protection at the stripe level
+- Files are divided to stripes across the nodes
+- Variable protection levels
+
+### Data Resiliency - Snapshots
+This is the ability to recover past versions of a file that has changed over time. Eventually, every storage admin gets asked to roll back to previous "Known Good" version of a file, OneFS provides this capability using snapshots.
+
+- <u>Copy On Write</u> - writes original blocks to the snapshot version first, them writes the data to the file system. 
+- <u>Redirect On Write</u> - writes changes into available file system space and then updates pointers to look at the recent changes.
+- Policy based scheduled snapshots
+
+### Data Recovery
+#### Backup
+Backup is managed through backup application external to the cluster it manages.
+Backup is managed over the external network in one of two ways
+- Direct backup device over LAN - slower performance.
+- B100 accelerator node provides backup to OneFS
+
+#### Replication
+Replication keeps a copy of data from one cluster to another cluster.
+OneFS replicates during normal operations, from one PowerScale cluster to another. Replication may be from one-to-one, or one-to-many
+
+##### Cluster-to-Cluster Synchronization
+- Scheduled replication over LAN or WAN
+- PowerScale to PowerScale only 
+- One-Way replication
+
+##### Replication Types
+- <u>Copy</u> - New files on the source are copied to the target, while files deleted on the source remain unchanged on the target
+- <u>Synchronization</u> - Only works in one direction and both the source and the target clusters maintain identical file sets, except files on the target that are _read only_
+
+##### <u>Bandwidth Throttling</u> 
+Used on replication jobs to optimize resources for high priority workflows
+
+### Data Retention
+This is the ability to prevent data from being deleted or modified before any future data.
+##### Retention Models
+- <u>Enterprise (More Flexible)</u> - Enable privileged deletes by and administrator
+- <u>Compliance (More Secure)</u> - Once data is committed to disk, individuals can't change or delete the data until the retention expires
+
+### Anti-Virus
+Allows for the scanning of files that are stored on a PowerScale cluster for malware. 
+If a threat is detected an administrator is notified
+
+### SmartLock
+This is a licensed software application that enables cost-effective and efficient protection against accidental, premature, or malicious deletions or modification of data. 
+
+
+
+
 
