@@ -4,19 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "1fb8e8784c7a40c0",
+        "id": "a3a61a16392de17f",
         "type": "tabs",
         "children": [
           {
-            "id": "1ff2ca02d1b8389b",
+            "id": "dfd8d4ddbcc2e299",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "ISM.pdf"
+                "file": "Practical Malware Analysis - Summary.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "ISM"
+              "icon": "lucide-file",
+              "title": "Practical Malware Analysis - Summary"
             }
           }
         ]
@@ -137,10 +139,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ISM.pdf"
+                "file": "Practical Malware Analysis - Summary.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of ISM"
+              "title": "Outline of Practical Malware Analysis - Summary"
             }
           },
           {
@@ -152,13 +154,23 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
+          },
+          {
+            "id": "667e9d5eab565667",
+            "type": "leaf",
+            "state": {
+              "type": "side-panel-control-view",
+              "state": {},
+              "icon": "viewIcon",
+              "title": "Markdown-Autocomplete"
+            }
           }
         ],
         "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 340.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -168,20 +180,27 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "obsidian-markdown-formatting-assistant-plugin:Open Markdown Formatting Assistant": false
     }
   },
-  "active": "1ff2ca02d1b8389b",
+  "active": "5bcac7f5b4738a05",
   "lastOpenFiles": [
-    "Linux.pdf",
+    "Images/Pasted image 20241221115848.png",
+    "Untitled 4.canvas",
+    "Untitled 3.canvas",
+    "Untitled 2.canvas",
+    "Untitled 1.canvas",
+    "Untitled.canvas",
     "Practical Malware Analysis - Summary.md",
-    "Networking.pdf",
     "PowerScale/PowerScale Concepts.md",
     "PowerScale/PowerScale Administration.md",
+    "ISM.pdf",
+    "Linux.pdf",
+    "Networking.pdf",
     "Images/Pasted image 20241218110621.png",
     "Images/Pasted image 20241218110144.png",
     "Images/Pasted image 20241217172700.png",
-    "ISM.pdf",
     "PowerScale",
     "linux.md",
     "Images/Pasted image 20241217143939.png",
@@ -191,7 +210,6 @@
     "Images/Pasted image 20241216144309.png",
     "Images/Pasted image 20241216115043.png",
     "access_token",
-    "Untitled.canvas",
     "2024-12-16.md",
     "2024-12-15.md",
     "Images/Pasted image 20241215140544.png",

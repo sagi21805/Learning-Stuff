@@ -1,5 +1,7 @@
 [
   "obsidian-underline",
   "obsidian-git",
-  "obsidian-editor-shortcuts"
+  "obsidian-editor-shortcuts",
+  "slash-commander",
+  "obsidian-markdown-formatting-assistant-plugin"
 ]
