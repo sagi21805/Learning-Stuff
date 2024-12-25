@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "a3a61a16392de17f",
+        "id": "b75375536b38afc9",
         "type": "tabs",
         "children": [
           {
-            "id": "dfd8d4ddbcc2e299",
+            "id": "5e65b24f5bba175d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Practical Malware Analysis - Summary.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Practical Malware Analysis - Summary"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -77,7 +73,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "d7625e987285e65d",
@@ -138,11 +134,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Practical Malware Analysis - Summary.md"
-              },
+              "state": {},
               "icon": "lucide-list",
-              "title": "Outline of Practical Malware Analysis - Summary"
+              "title": "Outline"
             }
           },
           {
@@ -154,65 +148,53 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
-          },
-          {
-            "id": "667e9d5eab565667",
-            "type": "leaf",
-            "state": {
-              "type": "side-panel-control-view",
-              "state": {},
-              "icon": "viewIcon",
-              "title": "Markdown-Autocomplete"
-            }
           }
         ],
         "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 340.5
+    "width": 201.5
   },
   "left-ribbon": {
     "hiddenItems": {
+      "obsidian-markdown-formatting-assistant-plugin:Open Markdown Formatting Assistant": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "obsidian-git:Open Git source control": false,
-      "obsidian-markdown-formatting-assistant-plugin:Open Markdown Formatting Assistant": false
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5bcac7f5b4738a05",
+  "active": "5e65b24f5bba175d",
   "lastOpenFiles": [
-    "Images/Pasted image 20241221115848.png",
-    "Untitled 4.canvas",
-    "Untitled 3.canvas",
-    "Untitled 2.canvas",
     "Untitled 1.canvas",
     "Untitled.canvas",
     "Practical Malware Analysis - Summary.md",
+    "Networking.pdf",
+    "Images/Pasted image 20241219111253.png",
+    "Untitled.md",
+    "Images/Pasted image 20241221115848.png",
     "PowerScale/PowerScale Concepts.md",
     "PowerScale/PowerScale Administration.md",
-    "ISM.pdf",
-    "Linux.pdf",
-    "Networking.pdf",
+    "PowerScale Concepts.md",
+    "PowerScale",
     "Images/Pasted image 20241218110621.png",
     "Images/Pasted image 20241218110144.png",
     "Images/Pasted image 20241217172700.png",
-    "PowerScale",
+    "ISM.pdf",
+    "Linux.pdf",
     "linux.md",
     "Images/Pasted image 20241217143939.png",
     "Images/Pasted image 20241217122912.png",
     "Images/Pasted image 20241216195410.png",
     "Images/Pasted image 20241216195351.png",
     "Images/Pasted image 20241216144309.png",
-    "Images/Pasted image 20241216115043.png",
     "access_token",
     "2024-12-16.md",
     "2024-12-15.md",
-    "Images/Pasted image 20241215140544.png",
     "Images",
     "Untitled 2.md",
     "Untitled 1.md"
