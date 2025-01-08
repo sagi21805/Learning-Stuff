@@ -13,15 +13,38 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Practical Malware Analysis - Summary.md",
+                "file": "ECS Concepts.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Practical Malware Analysis - Summary"
+              "title": "ECS Concepts"
+            }
+          },
+          {
+            "id": "3ab9669d8c741c03",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Images/Pasted image 20250108101714.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20250108101714"
+            }
+          },
+          {
+            "id": "c4fd9ed403d85a5c",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -73,7 +96,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -138,11 +162,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Practical Malware Analysis - Summary.md"
-              },
+              "state": {},
               "icon": "lucide-list",
-              "title": "Outline of Practical Malware Analysis - Summary"
+              "title": "Outline"
             }
           },
           {
@@ -184,33 +206,34 @@
       "obsidian-markdown-formatting-assistant-plugin:Open Markdown Formatting Assistant": false
     }
   },
-  "active": "5f2b78e25e86dc95",
+  "active": "c4fd9ed403d85a5c",
   "lastOpenFiles": [
-    "Pasted image 20241228172205.png",
-    "Pasted image 20241228165502.png",
+    "Reversing/Practical Reverse Engineering.md",
+    "ECS Concepts.md",
+    "Pasted image 20250108132938.png",
+    "Images/Pasted image 20241215140544.png",
+    "Images/Pasted image 20250108112914.png",
+    "Images/Pasted image 20250108101714.png",
+    "PowerScale/PowerScale Concepts.md",
+    "Images/Pasted image 20250107202413.png",
+    "Reversing/Practical Malware Analysis - Summary.md",
+    "Networking.pdf",
+    "Linux.pdf",
+    "Reversing",
+    "Images/Pasted image 20241228172205.png",
+    "Images/Pasted image 20241228165502.png",
     "2024-12-27.md",
-    "Practical Malware Analysis - Summary.md",
     "conflict-files-obsidian-git.md",
     "Images/Pasted image 20241224201236.png",
     "Images/Pasted image 20241224201032.png",
     "Images/Pasted image 20241224200032.png",
-    "Images/Pasted image 20241224192403.png",
-    "Images/Pasted image 20241224190050.png",
-    "ECS Concepts.md",
     "Untitled 1.canvas",
     "Untitled.canvas",
-    "Networking.pdf",
-    "Images/Pasted image 20241219111253.png",
     "Untitled.md",
-    "Images/Pasted image 20241221115848.png",
-    "PowerScale/PowerScale Concepts.md",
     "PowerScale/PowerScale Administration.md",
     "PowerScale Concepts.md",
     "PowerScale",
-    "Images/Pasted image 20241218110621.png",
-    "Images/Pasted image 20241218110144.png",
     "ISM.pdf",
-    "Linux.pdf",
     "linux.md",
     "access_token",
     "2024-12-16.md",
