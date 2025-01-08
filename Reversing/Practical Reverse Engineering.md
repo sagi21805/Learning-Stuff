@@ -97,8 +97,53 @@ ecx = *eax;
 eax = *(esi+0x34);
 edx = *(ecx + eax);
 ```
-These 
+These examples demonstrate memory access through a base register and offset, where offset can be a register or immediate. This form is commonly used to access structure members or data buffers at a location computed at runtime. For example suppose that _ECX_ points to a structure of type _KDPC_ with the layout:
+```C
+typedef struct {                //Memory Address
+	uint8_t type,               //0x000 
+	uint8_t Importance,         //0x001
+	uint16_t Number,            //0x002
+	_LIST_ENTRY DpcListEntery,  //0x004
+	void* DeferredRoutine,      //0x00c 
+	void* DeferredContext,      //0x010
+	void* SystemArgument1,      //0x014
+	void* SystemArgument2,      //0x018
+	void* DpcData,              //0x01c
+} KDCP;
+```
+The use of the following struct could be something like
+```C
+KDPC *p = ...;
+p->DpcData = NULL;
+p->DeferredRoutine = ...;
+*(int*)p = 0x113;
+p->DeferredContext = ...;
+```
+In assembly (Struct is located at address ECX)
+```asm
+mov eax, [ebp]
+; Read value from memory address EBP and store it to EAX
 
+and dword ptr [ecx+1Ch], 0 
+; And gates address at ecx+0x1C (Offset to DpcData) with 0 (Effictive set DcpData to 0)
+
+mov [ecx+0Ch], eax
+; Move value at EAX to address ECX+0x0C (offset to DeferredRoutine)
+
+mov dword ptr [ecx], 113h
+; Move value 0x113 to the ecx address, and enforce it to be a 32-bit address (Because 0x113 is a 16-bit value the address will try to only change the first 16 bits but we want to change a 32bit address so we add dword ptr)  
+
+mov [ecx+10h], eax
+; Change the value at ECX+0x10 (Which is DefferedContext) to the value at EAX
+```
+On line 4, we write the double-word value 0x113 to the base of the structure. This is writing double-word value into a byte, which will overwrite the values after it. 
+The code at line 4 could also be written less efficiently like this:
+```asm
+mov byte ptr [ecx], 13h
+mov byte ptr [ecx+1], 1
+mov word ptr [ecx+2], 0
+```
+The compiler decided to fold three instructions into one because it knew the constants ahead of time, and wanted to save space. 
 ## <u>Exercise</u>
 ## <u>System Mechanism</u>
 ## <u>Walk Through</u>
