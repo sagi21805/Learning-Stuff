@@ -25,18 +25,6 @@
             "id": "3ab9669d8c741c03",
             "type": "leaf",
             "state": {
-              "type": "image",
-              "state": {
-                "file": "Images/Pasted image 20250108101714.png"
-              },
-              "icon": "lucide-image",
-              "title": "Pasted image 20250108101714"
-            }
-          },
-          {
-            "id": "c4fd9ed403d85a5c",
-            "type": "leaf",
-            "state": {
               "type": "markdown",
               "state": {
                 "file": "Reversing/Practical Reverse Engineering.md",
@@ -48,7 +36,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -211,27 +199,27 @@
       "obsidian-markdown-formatting-assistant-plugin:Open Markdown Formatting Assistant": false
     }
   },
-  "active": "c4fd9ed403d85a5c",
+  "active": "3ab9669d8c741c03",
   "lastOpenFiles": [
-    "Reversing/Practical Reverse Engineering.md",
-    "ECS Concepts.md",
-    "Pasted image 20250108132938.png",
-    "Images/Pasted image 20241215140544.png",
-    "Images/Pasted image 20250108112914.png",
-    "Images/Pasted image 20250108101714.png",
-    "PowerScale/PowerScale Concepts.md",
-    "Images/Pasted image 20250107202413.png",
     "Reversing/Practical Malware Analysis - Summary.md",
-    "Networking.pdf",
+    "ECS Concepts.md",
+    "Pasted image 20250109174851.png",
+    "Pasted image 20250109165351.png",
+    "PowerScale/PowerScale Concepts.md",
+    "Reversing/Practical Reverse Engineering.md",
     "Linux.pdf",
-    "Reversing",
+    "Images/Pasted image 20250108132938.png",
     "Images/Pasted image 20241228172205.png",
-    "Images/Pasted image 20241228165502.png",
+    "Images/Pasted image 20241221115848.png",
+    "Images/Pasted image 20250109153919.png",
+    "Images/Pasted image 20250109145404.png",
+    "Images/Pasted image 20250109141428.png",
+    "Images/Pasted image 20250109141425.png",
+    "Images/Pasted image 20250109134428.png",
     "2024-12-27.md",
+    "Networking.pdf",
+    "Reversing",
     "conflict-files-obsidian-git.md",
-    "Images/Pasted image 20241224201236.png",
-    "Images/Pasted image 20241224201032.png",
-    "Images/Pasted image 20241224200032.png",
     "Untitled 1.canvas",
     "Untitled.canvas",
     "Untitled.md",

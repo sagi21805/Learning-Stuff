@@ -120,7 +120,7 @@ p->DeferredRoutine = ...;
 p->DeferredContext = ...;
 ```
 In assembly (Struct is located at address ECX)
-```asm
+```
 mov eax, [ebp]
 ; Read value from memory address EBP and store it to EAX
 
@@ -144,6 +144,44 @@ mov byte ptr [ecx+1], 1
 mov word ptr [ecx+2], 0
 ```
 The compiler decided to fold three instructions into one because it knew the constants ahead of time, and wanted to save space. 
+<u>Arrays</u>
+Array access is most of the time accessed in the general way
+array[base + index * size_of_element]
+```asm
+mov esi, _KdLogBuffer[esi*4] 
+; _KdLogBuffer is the base address 
+; ESI in this case is the index, and the elements size is 4
+```
+This can be observed in code looping over an array
+```asm
+loop_start:
+	mov eax, [edi+4]
+	; mov address from offset edi+4 to eax
+	; edi is probably an address in memory
+	; This can be infered because in the next line it 
+	; looks like indexing an array of ints
+	
+	mov eax [eax+ebx*4]
+	; load the ebx index of the array into eax
+	
+	test eax, eax
+	; tests if eax == eax, which is true, so it sets the ZF  
+	; flag into 0
+	
+	jz short loc_7F627F
+	; jumps into a location in memory if the ZF flag is 0 
+	; which it is because of last line
+	
+loc_7F627F:
+	inc ebx
+	; Add one to the ebx register
+	; compare ebx, with what is inside the address at edi
+	; 
+
+	cmp ebx, [edi]
+	jl short loop_start
+
+```
 ## <u>Exercise</u>
 ## <u>System Mechanism</u>
 ## <u>Walk Through</u>

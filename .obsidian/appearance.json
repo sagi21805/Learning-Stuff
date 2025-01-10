@@ -1,5 +1,9 @@
 {
   "baseFontSize": 20,
   "baseFontSizeAction": true,
-  "theme": "obsidian"
+  "theme": "obsidian",
+  "cssTheme": "",
+  "enabledCssSnippets": [
+    "github-markdown-dark"
+  ]
 }
