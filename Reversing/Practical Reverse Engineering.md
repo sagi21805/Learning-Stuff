@@ -41,7 +41,7 @@ For example a simple operation like incrementing a value in memory requires thre
 3. Write the register to memory (_STR_)
 On x86 this procedure would require only one instruction _INC_ or _ADD_ which can access the memory directly. The _MOVS_ instruction can read and write to memory at the same time.
 <u>Arm Assembly</u>
-```armasm
+```arm-asm
 LDR  R3, [R3]       
 ; Read the value at address R3
 
@@ -52,7 +52,7 @@ STR  R2, [R3]
 ; Write updated value back to address R3
 ```
 <u>x86 Assembly</u>
-```asm
+```nasm
 inc dword ptr [eax] 
 ; Directly increment value at address EAX
 ```
@@ -60,7 +60,7 @@ inc dword ptr [eax]
 Another important characteristic is that x86 uses variable-length instructions size: The instruction length can range from 1 to 15 bytes. On ARM, instructions are either 2 or 4 bytes in length.
 ### <u>Data Movement</u>
 Instructions operate on values that come from registers or main memory, The most common instruction for moving data is _MOV_. The simplest usage is to move a register or immediate to a register. For example:
-```asm
+```nasm
 mov esi, 0F003Fh 
 ; Set ESI = 0xF003 (h for hex)
 
@@ -69,7 +69,7 @@ mov esi, ecx
 ```
 The next common usage is to move data to/from memory. Similar to other assembly conventions, x86 uses square brackets ([]) to indicate memory access. (The only exception is the _LEA_ instruction, which uses [] but does not actually reference memory.) 
 <u>Simplest use case:</u>
-```asm
+```nasm
 mov dword ptr [eax], 1 
 ; Set the memory at address EAX to 1
 
@@ -120,7 +120,7 @@ p->DeferredRoutine = ...;
 p->DeferredContext = ...;
 ```
 In assembly (Struct is located at address ECX)
-```
+```nasm
 mov eax, [ebp]
 ; Read value from memory address EBP and store it to EAX
 
@@ -146,17 +146,19 @@ mov word ptr [ecx+2], 0
 The compiler decided to fold three instructions into one because it knew the constants ahead of time, and wanted to save space. 
 <u>Arrays</u>
 Array access is most of the time accessed in the general way
+
 array[base + index * size_of_element]
-```asm
+
+```nasm
 mov esi, _KdLogBuffer[esi*4] 
 ; _KdLogBuffer is the base address 
 ; ESI in this case is the index, and the elements size is 4
 ```
 This can be observed in code looping over an array
-```asm
+```nasm
 loop_start:
 	mov eax, [edi+4]
-	; mov address from offset edi+4 to eax
+	; mov what is in address edi+4 to eax
 	; edi is probably an address in memory
 	; This can be infered because in the next line it 
 	; looks like indexing an array of ints
@@ -165,23 +167,126 @@ loop_start:
 	; load the ebx index of the array into eax
 	
 	test eax, eax
-	; tests if eax == eax, which is true, so it sets the ZF  
-	; flag into 0
+	; this does eax AND eax, and sets the ZF flag
+	; Sets the ZF flag if eax == 0.
 	
 	jz short loc_7F627F
-	; jumps into a location in memory if the ZF flag is 0 
-	; which it is because of last line
+	; jumps into location in memory if the ZF flag is 1 
+	; this means that if eax is 0, the code will jump
+	; because of the last line.
+	; if eax != 0 the code will continue
+
+	..... some code .....
 	
 loc_7F627F:
 	inc ebx
 	; Add one to the ebx register
-	; compare ebx, with what is inside the address at edi
-	; 
-
+	; compare ebx, with whats inside the address at edi 
+	
 	cmp ebx, [edi]
+	; calculates [edi] - ebx and sets the SF flag
+
 	jl short loop_start
+	; if [edi] is bigger then ebx, SF = 1
+	; because the result must be negative
+	; if the reuslt is negative jump to loop_start  
+```
+
+```Pseudo code
+loop_start {
+	eax = *(edi + 4);
+	eax = *(eax + ebx * 4);
+	if eax == 0 {
+		jump loc_7F627F
+	}
+}
+loc_7F627F {
+	ebx+=1;
+	if (*edi - ebx) < 0 {
+		jump loop_start
+	}
+}
+```
+
+This Pseudo code can be translated to this C code
+```C
+typedef struct FOO {
+	int size;
+	int* elements;
+} FOO;
+
+FOO* edi = ...;
+
+for (ebx = ..; ebx < edi->size; ebx++ ) { // loc_7F627F
+	if (eax != 0) {
+		.... some code ....
+	}
+	// if the code reached here this means that eax == 0
+	// so there is a jump to the to the for-loop line
+}
 
 ```
+<u>MOVSB/MOVSW/MOVSD</u>
+These instructions move data with 1, 2 or 4  granularity between two memory addresses. They implicitly use the _EDI/ESI_ as the destination/source addresses respectively. In addition they also update the source and destination addresses automatically. If the DF (direction flat) is 0 addresses are decremented otherwise incremented. Typically these instructions are used to copy memory. In some cases they are coming with the _REP_ prefix which says they will repeat _ECX_ times.
+```nasm
+mov esi, offset _RamdiskBootGuid
+; ESI = pointer to RamdiskBootGuid
+
+lea edi, [ebp-0C0h]
+; EDI is an address somewhere on the stack 
+
+movsd 
+; copies 4 bytes from ESI to EDI
+; increments each by 4 
+movsd
+movsd
+movsd
+```
+Matching C code
+```C
+typedef struct GUID {
+	...
+} GUID;
+
+GUID RamDiskBootDiskGuid = ... ;
+GUID foo;
+memcpy(&foo, &RamDiskBootDiskGuid, sizeof(GUID))
+```
+<u>Load Effective Address instruction</u>
+This is instruction loads the effective address of something. 
+for example, if eax is an address in memory, and we want to get address eax + ebx * 3
+```
+mov ecx, eax + ebx * 3   
+; This is not valid 
+
+mov ecx, [eax + ebx * 3] 
+; This will return what is inside that address
+
+lea ecx, [eax + ebx * 3] 
+; This will load the effective address, like wanted
+```
+<u>With rep</u>
+```nasm
+push 8
+; push 8 into the stack (Discussed Later).
+
+pop ecx 
+; pop the stack, basically sets ecx to 8.
+
+mov esi, offset _KeServiceDescriptorTable
+mov edi, offset _KeServiceDescriptorTableShadow
+; set source and destination addresses
+
+rep movsd
+; repeates ecx times the movsd instruction
+; in this case ecx is 8 so repeates 8 times.
+; this means 32 bytes are copied, so we can infer 
+; that is the size of the object.
+
+```
+<u>Matching C Code</u>
+
+
 ## <u>Exercise</u>
 ## <u>System Mechanism</u>
 ## <u>Walk Through</u>

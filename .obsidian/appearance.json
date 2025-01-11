@@ -1,9 +1,10 @@
 {
-  "baseFontSize": 20,
+  "baseFontSize": 22,
   "baseFontSizeAction": true,
   "theme": "obsidian",
-  "cssTheme": "",
+  "cssTheme": "GitHub Theme",
   "enabledCssSnippets": [
     "github-markdown-dark"
-  ]
+  ],
+  "interfaceFontFamily": "Cascadia Mono"
 }
