@@ -2,7 +2,7 @@
   "baseFontSize": 22,
   "baseFontSizeAction": true,
   "theme": "obsidian",
-  "cssTheme": "GitHub Theme",
+  "cssTheme": "",
   "enabledCssSnippets": [
     "github-markdown-dark"
   ],
