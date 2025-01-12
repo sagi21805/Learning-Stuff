@@ -361,10 +361,10 @@ sub edi, ebx
 ; now edi points to the end of the string
 ; ebx is saved as the start of the string
 ; so edi - ebx sets edi to the length of the string
+```
+ _STOS_ is the same as _SCAS_ except it write the value _AL_/_AX_/_EAX_ to _EDI_. It is commonly used to initialize a buffer to a constant value (such as _memset()_)
 
 ```nasm
- _STOS_ is the same as _SCAS_ except it write the value _AL_/_AX_/_EAX_ to _EDI_. It is commonly used to initialize a buffer to a constant value (such as _memset()_)
-```
 xor eax, eax
 ; set eax to 0
 
@@ -378,18 +378,21 @@ mov edi, esi
 rep stosd
 ; write ecx * double-word bytes which in this case 36
 ```
+
 This is equivalent to ->
 ```C
 memset(edi, 0, 36)
 ```
 ### LODS Instruction
 Another instruction from the same family. It reads a 1-, 2-, or 4- byte value from _ESI_ and stores it in _AL_/_AX_/_EAX_
+
 ## <u>Exercise</u>
 Explain what is the type of _[EBP + 8]_ and _[EBP+C]_ in line 1 and 8, respectively
 next, explain what this snippet does.
 1) Type of _[ebp+8]_ == char*
 2) Type of [ebp+0Ch] == char
-```
+
+```nasm
 mov edi, [ebp+8]
 ; set edi to the value at address ebp+8
 ; probably a memory address
