@@ -1,9 +1,14 @@
 {
+<<<<<<< HEAD
   "baseFontSize": 19,
+=======
+  "baseFontSize": 22,
+>>>>>>> origin/master
   "baseFontSizeAction": true,
   "theme": "obsidian",
   "cssTheme": "",
   "enabledCssSnippets": [
     "github-markdown-dark"
-  ]
+  ],
+  "interfaceFontFamily": "Cascadia Mono"
 }
