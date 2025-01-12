@@ -92,7 +92,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 297.51103591918945
   },
   "right": {
     "id": "d7625e987285e65d",
@@ -185,7 +185,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 366.5
+    "width": 295.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -202,11 +202,14 @@
   "active": "3ab9669d8c741c03",
   "lastOpenFiles": [
     "Reversing/Practical Malware Analysis - Summary.md",
+    "Virtualization/VMware Fundamentals.md",
+    "Pasted image 20250112111024.png",
+    "Reversing/Practical Reverse Engineering.md",
+    "Virtualization",
     "ECS Concepts.md",
     "Pasted image 20250109174851.png",
     "Pasted image 20250109165351.png",
     "PowerScale/PowerScale Concepts.md",
-    "Reversing/Practical Reverse Engineering.md",
     "Linux.pdf",
     "Images/Pasted image 20250108132938.png",
     "Images/Pasted image 20241228172205.png",
@@ -215,7 +218,6 @@
     "Images/Pasted image 20250109145404.png",
     "Images/Pasted image 20250109141428.png",
     "Images/Pasted image 20250109141425.png",
-    "Images/Pasted image 20250109134428.png",
     "2024-12-27.md",
     "Networking.pdf",
     "Reversing",
