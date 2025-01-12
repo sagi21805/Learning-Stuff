@@ -362,7 +362,7 @@ sub edi, ebx
 ; ebx is saved as the start of the string
 ; so edi - ebx sets edi to the length of the string
 
-```
+```nasm
  _STOS_ is the same as _SCAS_ except it write the value _AL_/_AX_/_EAX_ to _EDI_. It is commonly used to initialize a buffer to a constant value (such as _memset()_)
 ```
 xor eax, eax
