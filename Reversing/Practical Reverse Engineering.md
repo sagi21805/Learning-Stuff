@@ -61,7 +61,7 @@ inc dword ptr [eax]
 Another important characteristic is that x86 uses variable-length instructions size: The instruction length can range from 1 to 15 bytes. On ARM, instructions are either 2 or 4 bytes in length.
 ### <u>Data Movement</u>
 ### MOV Instruction
-Instructions operate on values that come from registers or main memory, The most common instruction for moving data is _MOV_. The simplest usage is to move a register or immediate to a register. For example:
+Instructions operate on values that come from registers or main memory, The most commonUSB 3.0 and 3.1 instruction for moving data is _MOV_. The simplest usage is to move a register or immediate to a register. For example:
 ```nasm
 mov esi, 0F003Fh 
 ; Set ESI = 0xF003 (h for hex)
@@ -245,7 +245,16 @@ Repeats an instruction the number in _ecx_ times
 for example 
 ```nasm
 mov ecx, 10
-mov 
+rep scasb 
+```
+Will repeat the scasb command 10 times
+### <u>REPNE Instruction</u>
+This instruction repeats while ZF and or ecx is not zero, this instruction also decrements ecx first, while doing so and can be see like this.
+```C
+while (1) {
+	ecx--;
+	if (ZF == 1) || (ecx == 0) {break}
+}
 ```
 ### <u>MOVS Instruction</u>
 These instructions move data with 1, 2 or 4  granularity between two memory addresses. They implicitly use the _EDI/ESI_ as the destination/source addresses respectively. In addition they also update the source and destination addresses automatically. If the DF (direction flat) is 0 addresses are decremented otherwise incremented. Typically these instructions are used to copy memory. In some cases they are coming with the _REP_ prefix which says they will repeat _ECX_ times.
@@ -354,7 +363,78 @@ sub edi, ebx
 ; so edi - ebx sets edi to the length of the string
 
 ```
+ _STOS_ is the same as _SCAS_ except it write the value _AL_/_AX_/_EAX_ to _EDI_. It is commonly used to initialize a buffer to a constant value (such as _memset()_)
+```
+xor eax, eax
+; set eax to 0
+
+push 9 
+pop ecx
+; set ecx to 9
+
+mov edi, esi
+; set edi to the same address as esi
+
+rep stosd
+; write ecx * double-word bytes which in this case 36
+```
+This is equivalent to ->
+```C
+memset(edi, 0, 36)
+```
+### LODS Instruction
+Another instruction from the same family. It reads a 1-, 2-, or 4- byte value from _ESI_ and stores it in _AL_/_AX_/_EAX_
 ## <u>Exercise</u>
+Explain what is the type of _[EBP + 8]_ and _[EBP+C]_ in line 1 and 8, respectively
+next, explain what this snippet does.
+1) Type of _[ebp+8]_ == char*
+2) Type of [ebp+0Ch] == char
+```
+mov edi, [ebp+8]
+; set edi to the value at address ebp+8
+; probably a memory address
+
+mov edx, edi
+; save the value of edi in edx
+
+xor eax, eax
+; zero out eax 
+
+or ecx, 0FFFFFFFFh
+; set ecx to FFFFFFFF (which is max int32)
+
+repne scasb
+; compare al to the values at address edi, until it equals
+; probably means to search the end of a string (char*)
+; while decrementing the ecx register by 1 each iteration
+; after this ecx = ecx - len(edi)
+; the length is including the \0 bit
+; means len('123\0') is 4
+
+add ecx, 2
+; assuming the length of the string is more then two
+; set the value of ecx to 0xFFFFFFFF - len(edi) + 2
+
+neg ecx
+; set ecx to it's 2s compliment, which is not ecx, add ecx, 1
+; this sets ecx to the true length of the string
+; which is all the charaters without the \0
+ 
+mov al, [ebp+0Ch]
+; moves a constant value to the al register, probably a char
+
+mov edi, edx
+; set edi to the memory address in edx
+; which restest edi to the start of the string
+
+rep stosb
+; repeat ecx times, which is the length of the string 
+; and store in each iteration the constant value al
+
+mov eax, edx
+; transfer the base of the string to eax
+```
+This program gets a cstring in [ebp+8] and a constant in [ebp+C], it calculates the length of the string and replaces it by the constant.
 ## <u>System Mechanism</u>
 ## <u>Walk Through</u>
 ## <u>Exercises</u>
