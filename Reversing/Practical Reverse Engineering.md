@@ -60,7 +60,7 @@ inc dword ptr [eax]
 
 Another important characteristic is that x86 uses variable-length instructions size: The instruction length can range from 1 to 15 bytes. On ARM, instructions are either 2 or 4 bytes in length.
 ### <u>Data Movement</u>
-### MOV Instruction
+#### MOV Instruction
 Instructions operate on values that come from registers or main memory, The most commonUSB 3.0 and 3.1 instruction for moving data is _MOV_. The simplest usage is to move a register or immediate to a register. For example:
 ```nasm
 mov esi, 0F003Fh 
@@ -146,7 +146,7 @@ mov byte ptr [ecx+1], 1
 mov word ptr [ecx+2], 0
 ```
 The compiler decided to fold three instructions into one because it knew the constants ahead of time, and wanted to save space. 
-### <u>Array Access</u>
+#### <u>Array Access</u>
 Array access is most of the time accessed in the general way
 array[base + index * size_of_element]
 
@@ -227,7 +227,7 @@ for (ebx = ..; ebx < edi->size; ebx++ ) { // loc_7F627F
 }
 
 ```
-### <u>LEA Instruction</u>
+#### <u>LEA Instruction</u>
 Load Effective address instruction loads the address of something. 
 for example, if eax is an address in memory, and we want to get address eax + ebx * 3
 ```
@@ -240,7 +240,7 @@ mov ecx, [eax + ebx * 3]
 lea ecx, [eax + ebx * 3] 
 ; This will load the effective address, like wanted
 ```
-### <u>REP Instruction</u>
+#### <u>REP Instruction</u>
 Repeats an instruction the number in _ecx_ times 
 for example 
 ```nasm
@@ -248,7 +248,7 @@ mov ecx, 10
 rep scasb 
 ```
 Will repeat the scasb command 10 times
-### <u>REPNE Instruction</u>
+#### <u>REPNE Instruction</u>
 This instruction repeats while ZF and or ecx is not zero, this instruction also decrements ecx first, while doing so and can be see like this.
 ```C
 while (1) {
@@ -256,7 +256,7 @@ while (1) {
 	if (ZF == 1) || (ecx == 0) {break}
 }
 ```
-### <u>MOVS Instruction</u>
+#### <u>MOVS Instruction</u>
 These instructions move data with 1, 2 or 4  granularity between two memory addresses. They implicitly use the _EDI/ESI_ as the destination/source addresses respectively. In addition they also update the source and destination addresses automatically. If the DF (direction flat) is 0 addresses are decremented otherwise incremented. Typically these instructions are used to copy memory. In some cases they are coming with the _REP_ prefix which says they will repeat _ECX_ times.
 ```nasm
 mov esi, offset _RamdiskBootGuid
@@ -383,10 +383,10 @@ This is equivalent to ->
 ```C
 memset(edi, 0, 36)
 ```
-### LODS Instruction
+#### LODS Instruction
 Another instruction from the same family. It reads a 1-, 2-, or 4- byte value from _ESI_ and stores it in _AL_/_AX_/_EAX_
 
-## <u>Exercise</u>
+### <u>Exercise</u>
 Explain what is the type of _[EBP + 8]_ and _[EBP+C]_ in line 1 and 8, respectively
 next, explain what this snippet does.
 1) Type of _[ebp+8]_ == char*
@@ -438,6 +438,58 @@ mov eax, edx
 ; transfer the base of the string to eax
 ```
 This program gets a cstring in [ebp+8] and a constant in [ebp+C], it calculates the length of the string and replaces it by the constant.
+### Arithmetic Operations
+These are fundamental mathematical operations such as addition, subtraction, multiplication, and division which are natively supported by the instruction set. Bit-level operations such as _AND_, _OR_, _XOR_, _NOT_ and left and right shift operations also have native corresponding instructions.  With the exception of multiplication and division, the remaining instructions are straightforward. in terms of usage
+```nasm
+add esp, 14h         ; esp = esp + 0x14
+sub ecx, eax         ; exc = ecx - eax
+sub esp, 0Ch         ; esp = esp - 0xC
+inc ecx              ; ecx = ecx + 1
+dec edi              ; edi = edi - 1
+or eax, 0FFFFFFFFh   ; eax = eax | 0xFFFFFFFF
+and ecx, 7           ; ecx = ecx & 7
+xor eax, eax         ; eax = eax ^ eax
+not edi              ; edi = ~edi
+shl cl, 4            ; cl = cl << 4
+shr ecx, 1           ; ecx = ecx >> 1
+rol al, 3            ; rotate AL left 3 positions
+ror al, 1            ; rotate AL right 1 position 
+```
+
+The _Left_ and _Right_ shift operations are used frequently as _Strength Reduction_ because they replace computationally intensive operations such as multiplication or division. 
+When the divisor is know to be a power of 2, it can always be reduced to bit shifting, for example, 100 * 2 is the same as 100 <<1 and 100/2 is the same as 100>>1 which are much much faster operations.
+
+#### MUL Instruction
+This is a multiplication instruction, that has the following general form. _mul reg/memory_ 
+The given register is multiplied with _AL_, _AX_, or _EAX_, The result is stored at _AX_, _DX_:_AX_ or 
+_EDX_:_EAX_ depending on the operand width.
+```nasm
+mul ecx                ; EDX:EAX = EAX * ECX
+mul dword ptr [esi+4]  ; EDX:EAX = EAX * dword_at(ESI+4)
+mul cl                 ; AX = AL * CL
+mul dx                 ; DX:AX = AX * DX
+```
+For example: 
+```
+mov eax, 3 
+mov ecx, 22222222h
+mul ecx
+; EDX:EAX = 3 * 0x22222222 = 0x6666666 (no overflow) EDX = 0, EAX = 0x66666666
+
+mov eax, 3
+mov ecx, 80000000h
+mul ecx 
+; EDX:EAX = 3 * 0x80000000 = 0x180000000 (overflow) EAX = 1, EAX = 0x800000000
+```
+<u>IMUL Instruction</u>
+Very similar to MUL
+- _IMUL_ reg/mem -> same as mul (multiplied by EAX)
+- _IMUL_ reg1, reg2/mem -> reg1 = reg1 * reg2/mem
+- _IMUL_ reg1, reg2/mem, imm -> reg1 = reg2/mem * imm
+#### DIV Instruction
+This is a division insturction 
+
+
 ## <u>System Mechanism</u>
 ## <u>Walk Through</u>
 ## <u>Exercises</u>
