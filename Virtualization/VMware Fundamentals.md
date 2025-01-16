@@ -159,6 +159,69 @@ Before implementing your vSphere environment, the following things must be consi
 - Set VM options
 - Control the VM CPU and memory resources.
 ## Removing VMs 
+VMs can removed in the following ways:
+- Remove from inventory 
+	- The VM is unregistered from the ESXi host and vCenter server
+	- The VM's files remain on the disk
+	- The VM can later be registered (added) to the inventory.
+- Delete from disk
+	- All VM files are permanently deleted from the datastore.
+	- The VM is unregistered from the ESXi host and vCenter server
+#note 
+**VM that is not registered and not deleted from disk after a certain amount of time is considered _Orphan_**
+## Migrating VMs with vSphere vMotion
+The source host (ESXi01) and the destination host (ESXi02) can access the shared datastore that holds the VM's files
+![[Pasted image 20250115111041.png]]
+## Host Requirements for vSphere vMotion Migration
+Source and Destination hosts mush have the following characteristics 
+- Accessibility to all the VM's storage:
+	- 128 concurrent migrations are possible per VMFS or NFS datastore
+	- If the swap file location on the destination host differs from the swap file location on the source host, the swap file is copied to the new location
+- VMkernel port with vSphere vMotion enabled
+- Matching management network IP address families between source and destination hosts
+- At least 1 Gigabit of Ethernet network:
+	- Concurrent migrations are limited to four on gig Ethernet
+	- Concurrent migrations on faster Ethernet are limited at 8
+- Compatible CPU:
+	- The CPU features sets of both the source and destination host must be compatible
+# vSphere Clusters
+A cluster is used in vSphere to share physical resources between a group of ESXi hosts. 
+vCenter server manages cluster resources as a single pool of resources.
+You can create one or more clusters based on the purpose each cluster must fulfill like:
+- Management
+- Production
+- Compute
+A cluster can contain up to 64 hosts.
+When a cluster is created, some features can be enabled like:
+- vSphere DRS
+- vSphere HA
+- vSAN
+Cluster can be used for high availability, which means a VM can be opened on another host that is active if other host failed.
+## vSphere Distributed Resource Scheduler
+This is a cluster feature that helps improve resource allocation across all hosts in a cluster. It aggregates computing capacity across a collection of servers into logical resources pools.
+vSphere DRS is used in the following situations:
+- Initial placement of a VM when it is powered on.
+- Load balancing.
+- Migrating VMs when an ESXi host is placed on maintenance mode.
+# vSphere Fault Tolerance
+vSphere fault tolerance provides instantaneous failover and continuous availability:
+- Zero downtime
+- Zero data loss
+- No loss of VM network connectivity
+![[Pasted image 20250115165013.png]]
+
+## vSphere Fault Tolerance with vSphere HA and DRS
+vSphere HA and DRS are Fault Tolerance aware:
+- vSphere HA:
+	- Is required for Fault Tolerance
+	- Restarts failed VMs
+- vSphere DRS
+	- Selects which hosts run the primary and secondary VM, when VM is powered on
+	- Does not automatically migrate fault tolerant VMs
+
+
+
+
 
 
 

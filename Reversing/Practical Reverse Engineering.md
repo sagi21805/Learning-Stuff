@@ -487,7 +487,182 @@ Very similar to MUL
 - _IMUL_ reg1, reg2/mem -> reg1 = reg1 * reg2/mem
 - _IMUL_ reg1, reg2/mem, imm -> reg1 = reg2/mem * imm
 #### DIV Instruction
-This is a division insturction 
+This is a division instruction that take the divisor as parameter and have the following form: 
+_DIV_ reg/mem. Depending on the divisor size, DIV will use _AX_, _DX_:_AX_ or _EDX_:_EAX_. the resulting quotient/reminder pair are stored in _AL_/_AH_ _AX_/_DX_ or _EAX_/_EDX
+```
+div ecx                  ; EDX:EAX / ECX quotient in EAX
+div cl                   ; AX / CL, quocient in AL, reminder in AH
+div dword ptr [esi+24h]  ; same as line one 
+
+mov cl, 2
+mov eax, 0Ah
+div cl 
+; AX / CL = A/2 = 5 in AL (quotient) AH = 0 (reminder)
+
+mov cl, 2
+mov eax, 09h
+div cl
+; AX / CL = 9/2 = 4 in AL, AH = 1 (reminder)
+```
+
+### Stack Operations and Function Invocations
+The stack is a fundamental data structure in programming languages and operating systems. For example, local variables in C are stored on the functions stack space. 
+When operating systems transition from ring 3 to ring 0, it saves state information on the stack. 
+#### PUSH Instruction
+This instruction decrements the _ESP_ (Stack Pointer) <u>and then</u> writes data in the location in memory pointed by _ESP_ 
+#### POP Instruction
+This instruction increments the _ESP_ register <u>and then</u> reads data from the location in memory pointed by _ESP_. This instruction also takes a register to write the data to, and can read 1, 2 or 4 bytes with a prefix override. In practice the default value 4, is almost always used because OS requires stack to be double-word aligned.
+
+```
+; initial ESP = 0xb20000
+mov eax, 0AAAAAAAAh
+mov ebx, 0BBBBBBBBh
+mov ecx, 0CCCCCCCCh
+mov edx, 0DDDDDDDDh
+push eax
+; address 0xb1ffffc will contain the value 0xAAAAAAAA 
+; and ESP will be 0xb1ffffc (=0xb200000-4)
+push ebx 
+; address 0xb1ffff8 will contain the value 0xBBBBBBBB
+; and ESP will be 0xb1ffff8 (=0xb1ffffc-4)
+pop esi
+; ESI will contain the value at 0xb1ffffc (=0xb1ffff8+4) which is 0xBBBBBBBB
+pop edi 
+; EDI will contain the balue at 0xb200000 (=0xb1ffff8+4) which is 0xAAAAAAAA
+```
+
+![[Pasted image 20250115175058.png]]
+_ESP_ can also be directly modified by other instructions, such as _ADD_ and _SUB_.
+### Function Invocation
+While high-level programming languages have the concept of functions that can be called and returned from, the processor doesn't provide such abstraction. At the lowest level, the processor operates only on concrete objects, such as registers or data coming from memory, and functions are implemented using the stack data structure.
+Consider the following function ->
+```C
+int __cdecl addme(short a, short b) {
+	return a + b;
+}
+```
+the calling of this function would look like this; 
+```C
+int a = 3;
+int b = 4; 
+int c = addme(a, b)
+```
+In assembly these two code snippets would look like this; for the function 
+```nasm
+push ebp
+mov ebp, esp
+; This two-instuction sequence in typically known as the 'function prologue'
+; because it establishes a new function frame.
+; it basically saves the original pointer to ebp on the stack
+; and puts the stack pointer inside the ebp register
+; ----------------------------------- Note ------------------------------------
+; This proceadure is not necessery, but it makes it easier to track function
+; variables as they are pushed and poped from the stack. 
+; because everything, including the return address will be static distance
+; from the ebp register
+; optimizing functions to not do this is called 'frame pointer omission'
+; -----------------------------------------------------------------------------
+
+movsx eax, word ptr [ebp+8]
+movsx ecx, word ptr [ebp+0Ch]
+add eax, ecx
+; This is the body of the function doing the add logic computation 
+
+mov esp, ebp 
+pop ebp
+; This two-instruction sequence in tyipcally known as the 'function epilogue'
+; because it restores the stack frame to what it was before the function call
+; firstly is restores the stack pointer to what is was at the start
+; which is the base pointer, then restores ebp 
+; ebp was saved on the stack at the function prologue
+
+retn
+; this instruction pops the stack, and resumes execution at the address 
+; located on the top of the stack
+; basically 'pop eip'
+```
+
+The calling of this function would look like this ->
+```nasm
+push eax
+push ecx 
+; push the variables 'a' and 'b'
+
+call addme
+; this instruction firstly pushes the next instruction address to the stack
+; then it changes the EIP pointer to the address of the add me function
+; so it can continue the execution of the function there
+; basically push [eip+8] (next instruction after the call) then mov eip, func
+
+add esp, 8
+; cleanup of the stack per __cdecl call convention, if the function 'addme' 
+; had local variables, the code would need to grow the stack by substracting 
+; ESP after the function prolouge, and then adding it back befor the retn 
+; here we cleanup the stack of the main function 
+```
+
+#### <u>Calling Convention</u>
+| .                      | CDECL                                                                                        | STDCALL                                                     | FASTCALL                                                                      |
+| ---------------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Parameters             | Pushed on top of the stack from right to left. Caller must clean up the stack after the call | Same as _CDECL_ except that the callee must clean the stack | First two parameters are passed in _ECX_ and  _EDX_ The rest are on the stack |
+| Return Value           | Stored in _EAX_                                                                              | Stored in _EAX_                                             | Stored in _EAX_                                                               |
+| Non-volatile registers | _EBP_, _ESP_, _EBX_, _ESI_, _EDI_                                                            | _EBP_, _ESP_, _EBX_, _ESI_, _EDI_                           | _EBP_, _ESP_, _EBX_, _ESI_, _EDI_                                             |
+### Exercise
+1.  EIP is a read-only register so '_mov eax, eip_' is not a valid instruction. 
+	to read the value of EIP, we can use call some_function and then afterwards pop eax
+	in the function which will put the value of eip in eax
+	to intentionally change eip there is the jmp instruction or push with ret
+```nsm
+some_function:
+	pop eax
+call some_function
+; this will read the eip register
+```
+2. 
+```
+mov dword ptr [rsp], 0AABBCCDDh
+ret
+; This will put AABBCCDD in the stack in ret will take it and put it on EIP
+
+mov eax, 0AABBCCDDh
+jmp eax
+```
+
+3. If the function would change some variables on the stack, and push them, and will not properly restore the stack, the current return address won't be where it is expected, and the code will crush or return to some random address.
+4. If the return type is bigger then what can fit in the return register (most of the time eax), then a pointer is implicitly give to the function that points on the structure or thing that is returned. 
+### Control Flow
+This section describes how the system implements stuff like if/else statements, switch/case, while/for which are implemented with the _CMP, TEST, JMP_ and _Jcc_
+instruction where 'cc' stands for conditional code (equal, greater then, etc..)
+These instructions work closely to the _EFLAGS_ registers, which has the following flags
+- <u>ZF/Zero Flag</u> - set if the last arithmetic operations resulted in zero
+- <u>SF/Sign Flag</u> - set to the most significant bit of the result
+- <u>CF/Carry Flag</u> - set when the result requires carry (applies to unsigned numbers)
+- <u>OF/Overflow Flag</u> - set if the result overflows (applies to signed numbers, i.e -1 = maxint)
+
+| Conditional Code | English Description                                             | Machine Description |
+| ---------------- | --------------------------------------------------------------- | ------------------- |
+| B/NAE            | Below/Neither Above nor Equal. Used for unsigned operations     | CF=1                |
+| NB/AE            | Not Below/Above or Equal. Used for unsigned operations          | CF=0                |
+| E/Z              | Equal Zero                                                      | ZF=1                |
+| NE/NZ            | Not Equal / Not Zero                                            | ZF=0                |
+| L                | Less than/Neither Greater not Equal. Used for signed operations | (SF ^ OF)=1         |
+| GE/NL            | Greater or Equal / Not Less than. Used for signed operations    | (SF ^ OF)=0         |
+| G/NLE            | Greater / Not Less not Equal. Used for signed operations        | ((SF ^ OF) \| ZF)=0 |
+Because assembly doesn't have a defined type system, one of the few ways to recognize signed / unsigned types is through these conditional codes.
+#### CMP Instruction
+Subtracts two registers one from another and changes the appropriate flags without saving the result. 
+```nasm
+cmp eax, ecx
+jz
+; jump if eax == ecx
+; eax - ecx = 0 so jz (jump zero) will jump
+```
+#### TEST Instruction
+Performs logical _AND_ between the two registers and changes the appropriate flags without saving the result
+```
+
+```
+
 
 
 ## <u>System Mechanism</u>

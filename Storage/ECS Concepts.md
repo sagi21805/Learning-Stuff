@@ -32,11 +32,9 @@ ECS key values cover four main aspects
 - Enables unified global file access and disaster recovery.
 - Native support for NFS v3. 
 - Integrated metadata management 
-
 ### Enterprise Class
 - Provides multi-tenant capabilities for flexible storage services
 - It caters to diverse clients while ensuring data integrity 
-
 ## ECS Features
 
 - ECS scales linearly as customer requirements grow, both compute and capacity is added when a new server is added to the cluster.
