@@ -658,9 +658,12 @@ jz
 ; eax - ecx = 0 so jz (jump zero) will jump
 ```
 #### TEST Instruction
-Performs logical _AND_ between the two registers and changes the appropriate flags without saving the result
+Performs logical _AND_ between the two registers and changes the appropriate flags on the _EFLAGS_ register without saving the result
 ```
-
+test eax, eax
+jnz
+; jmp if eax != 0 
+; eax & eax != 0 so jz (jumo not zero) will jump
 ```
 
 
