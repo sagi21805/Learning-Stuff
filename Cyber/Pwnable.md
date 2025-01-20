@@ -47,7 +47,9 @@ _Assuming the base address EBP is zero_
 | (-8)-0      | # empy? (not relevant)         |
 | 0-4         | saved EBP from main            |
 | 4-8         | saved EIP from the _call func_ |
-| 8-12        | KEY                            
+| 8-12        | KEY                  
+
+          
 After tracing the stack, we can infer how much we need to overflow the buffer, for example for this buffer, we need to overflow -44 which is the start of the buffer, all the way to +8 where the key is located, although this will overwrite the return pointer, which typical buffer overflow will want to target, it will continue the jump to a shell so we don't mind that. 
 The wanted key is the number 0xCAFEBABE, so we need to input it backwards because of little endieness
 #note 
