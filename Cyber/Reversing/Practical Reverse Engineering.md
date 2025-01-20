@@ -666,7 +666,59 @@ jnz
 ; eax & eax != 0 so jz (jumo not zero) will jump
 ```
 
+### Condition Cases 
+#### If-Else
+If-Else constructs are simple to recognize because the involve compare/test followed by a _jmp_ of some type, for example:
+```nasm
+mov esi, [ebp+8]
+; load some address to ESI
 
+mov edx, [esi]
+test edx, edx 
+; load what is inside the address and check for zero, which means *esi = 0
+
+jz short loc_4E31F9
+; if zero, means *edx = 0. jump to location and return.
+; else continue with the code bellow
+
+mov ecx, offset _FsRtlFastMutexLookasideList 
+; move offset to function, probably used in the call
+
+call _ExFreeToNPagedLookasideList@8
+; call the function _ExFreeToNPagedLookasideList
+
+and dword ptr [esi], 0
+; zero out what is inside address esi, *esi = 0;
+
+lea eax, [esi+4]
+push eax
+call _FsRtlUninitializeBaseMcb@4
+; then call the function _fsRtlUninitizlizeBaseMcb, probably a fast call
+; with *(esi+4) as parameter
+
+loc_4E31F9:
+	pop esi
+	pop ebp
+	retn 4
+_FsRtlUninitializeLargeMcb#4 endp
+```
+This code looks like this in C:
+```C
+if (*esi == 0) {
+	return;
+}
+ExFreeToNpagedLookAsideList(...);
+*esi = 0;
+return;
+
+// This code is the same as
+
+if (*esi != 0) {
+	 ExFreeToNpagedLookAsideList(...);
+	 *esi = 0;
+}
+return; 
+```
 
 ## <u>System Mechanism</u>
 ## <u>Walk Through</u>

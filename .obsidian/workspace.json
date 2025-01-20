@@ -170,7 +170,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 395.5
+    "width": 385.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -186,13 +186,16 @@
   },
   "active": "cc470a9f8cff522d",
   "lastOpenFiles": [
+    "Cyber/Pwnable.md",
     "Cyber/Reversing/Practical Reverse Engineering.md",
+    "Pasted image 20250120190115.png",
+    "Images/Pasted image 20250120190239.png",
+    "Storage/VxRail Concepts.md",
+    "Images/Pasted image 20250120171025.png",
     "Cyber/Reversing/Practical Malware Analysis - Summary.md",
     "Cyber/Reversing",
-    "Cyber/PWNABLE.md",
     "Cyber",
     "Reversing/Practical Malware Analysis - Summary.md",
-    "Storage/VxRail Concepts.md",
     "Reversing/Practical Reverse Engineering.md",
     "Images/Pasted image 20250119145618.png",
     "Images/Pasted image 20250119142114.png",
@@ -210,9 +213,6 @@
     "Images/Pasted image 20250115111041.png",
     "Pasted image 20250109174851.png",
     "Images/Pasted image 20250112161750.png",
-    "Images/Pasted image 20250112111024.png",
-    "Images/Pasted image 20250109174851.png",
-    "Images/Pasted image 20250109165351.png",
     "conflict-files-obsidian-git.md",
     "Virtualization",
     "2024-12-27.md",
