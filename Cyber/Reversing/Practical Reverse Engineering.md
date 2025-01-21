@@ -648,6 +648,7 @@ These instructions work closely to the _EFLAGS_ registers, which has the followi
 | L                | Less than/Neither Greater not Equal. Used for signed operations | (SF ^ OF)=1         |
 | GE/NL            | Greater or Equal / Not Less than. Used for signed operations    | (SF ^ OF)=0         |
 | G/NLE            | Greater / Not Less not Equal. Used for signed operations        | ((SF ^ OF) \| ZF)=0 |
+
 Because assembly doesn't have a defined type system, one of the few ways to recognize signed / unsigned types is through these conditional codes.
 #### CMP Instruction
 Subtracts two registers one from another and changes the appropriate flags without saving the result. 
