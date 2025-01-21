@@ -867,23 +867,23 @@ switch (edi) {
 
 	case 0:
 	case 1:
-		//goto loc_1001125
+		// goto loc_1001125
 		esi = 0x40;
 		break;
 
 	case 2:
 	case 5:
-		//goto loc_1000113A
+		// goto loc_1000113A
 		esi = 0x30;
 		break;
 
 	case 3:
-		//goto loc_1000112C
+		// goto loc_1000112C
 		esi = 0x20;
 		break;
 
 	case 4:
-		//goto loc_10001141
+		// goto loc_10001141
 		esi = 0x38;
 		break;
 
@@ -895,7 +895,128 @@ switch (edi) {
 ```
 This method saves up on 10 additional instruction in this example to test each case and branch to the handler.
 #### Loops 
-At the machine level, loops are implemented using a combination of _Jcc_ and _JMP_ instructions. In other words, they are implemented using _if/else_ and _goto_ constructs. The best way to understand it is to rewrite a loop using only _if_, _else_ and _goto_
+At the machine level, loops are implemented using a combination of _Jcc_ and _JMP_ instructions. In other words, they are implemented using _if/else_ and _goto_ constructs. The best way to understand it is to rewrite a loop using only _if_, _else_ and _goto_. consider the following example: 
+```C
+// This is a regular loop in C
+for (int i = 0; i<10; i++) {
+	printf("%d\n", i);
+}
+printf("Done!\n");
+
+// This is the same loop using if, else and goto
+int i = 0;
+loop_start: 
+	if (i < 10) {
+		printf("%d\n", i);
+		i++;
+		goto loop_start
+	}
+printf("Done");
+```
+When complied, these are looking the same on the machine-code level.
+```nasm
+mov edi, ds:__imp_printf
+; put the address of the printf function in edi
+
+xor esi, esi
+; zero out esi, 'int i = 0'
+loc_401010:
+	push esi
+	push offset Format  
+	; push the number i, and format string "%d\n" 
+	; to the stack per __cdecl call convention
+	call edi
+	; call the printf function, and print the message
+	inc esi
+	; increment esi (i++)
+	add esp, 8
+	; clean the stack per cdecl call convention of printf
+	cmp esi, 0Ah
+	jl short loc_401010
+	; jump to the start of the loop if i < 10
+push offset aDone
+; push the string "Done" to the stack
+call edi
+; call the printf function
+add esp, 4
+; clean the stack
+```
+#note
+In this example we can know signed numbers were used because of the type of the jump instruction. <u>*Remember* - If "above/below" is used, it is unsigned; if "less than/greater than", it was done on signed integers</u>
+Another interesting loop is this ->
+```nasm
+sub_1000AE3B proc near
+push edi
+;store the value on edi to restore later
+
+push esi
+; esi is probably the start address of the string
+
+call ds:lstrlenA
+; call the strlen function on a string 
+
+mov edi, eax
+; move the length to the edi register
+
+xor ecx, ecx
+xor edx, edx 
+; zero out ecx & edx
+
+test edi, edi
+jle short loc_1000AE5B
+; check the length of the string is less or equal to zero
+; if so jump to the end of the function
+
+loc_1000AE4D:
+	mov al, [edx+esi]
+	mov [ecx+esi], al
+	add edx, 3
+	inc ecx
+	; al = str[edx]
+	; str[ecx] = al
+	; edx += 3
+	; ecx++
+
+	cmp edx edi
+	jl short loc_1000AE4D
+	; check if edx < len(str) if so, continue looping
+
+loc_1000AE5B:
+	mov byte ptr [ecx+esi], 0
+	; put the null byte on the end of the new string 
+	; new string length can be smaller so it needs 
+	; to add the null byte just in case
+	
+	mov eax, esi
+	pop edi
+	; move the string address to the return register eax
+	; and retrive the value of edi before the function
+	
+	ret
+	; return to the main code
+	
+sub endp
+```
+Matching C code
+```C
+char* function(char* esi) {
+	int length = lstrlenA(esi); // length of string
+	int ecx = 0;
+	int edx = 0;
+
+	if (length == 0) { return NULL;}
+
+	while (edx < length) {
+		al = esi[edx];
+		esi[ecx] = al;
+		ecx++;
+		edx+=3;
+	}
+	esi[ecx] = 0;
+	return esi;
+
+}
+```
 ## <u>System Mechanism</u>
 ## <u>Walk Through</u>
 ## <u>Exercises</u>
