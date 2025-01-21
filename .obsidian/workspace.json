@@ -52,7 +52,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "stretc",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PowerScale Concepts.md",
+                "file": "Cyber/Reversing/Practical Reverse Engineering.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for PowerScale Concepts"
+              "title": "Backlinks for Practical Reverse Engineering"
             }
           },
           {
@@ -184,13 +184,16 @@
       "obsidian-markdown-formatting-assistant-plugin:Open Markdown Formatting Assistant": false
     }
   },
-  "active": "cc470a9f8cff522d",
+  "active": "5bcac7f5b4738a05",
   "lastOpenFiles": [
-    "Cyber/Pwnable.md",
+    "Virtualization/vSAN Planning and Deployment.md",
+    "Missions.md",
+    "Virtualization/VxRail Concepts.md",
+    "Virtualization/VMware Fundamentals.md",
     "Cyber/Reversing/Practical Reverse Engineering.md",
+    "Cyber/Pwnable.md",
     "Pasted image 20250120190115.png",
     "Images/Pasted image 20250120190239.png",
-    "Storage/VxRail Concepts.md",
     "Images/Pasted image 20250120171025.png",
     "Cyber/Reversing/Practical Malware Analysis - Summary.md",
     "Cyber/Reversing",
@@ -203,7 +206,6 @@
     "Storage/PowerScale/PowerScale Administration.md",
     "Storage/ECS Concepts.md",
     "General/ISM.pdf",
-    "Virtualization/VMware Fundamentals.md",
     "Images/Pasted image 20250115175058.png",
     "Images/Pasted image 20250115165013.png",
     "General/Linux.pdf",
@@ -219,7 +221,6 @@
     "Reversing",
     "Untitled 1.canvas",
     "Untitled.canvas",
-    "Untitled.md",
     "PowerScale Concepts.md",
     "Storage/PowerScale",
     "linux.md",

@@ -140,7 +140,7 @@ mov [ecx+10h], eax
 ```
 On line 4, we write the double-word value 0x113 to the base of the structure. This is writing double-word value into a byte, which will overwrite the values after it. 
 The code at line 4 could also be written less efficiently like this:
-```asm
+```nasm
 mov byte ptr [ecx], 13h
 mov byte ptr [ecx+1], 1
 mov word ptr [ecx+2], 0
@@ -230,7 +230,7 @@ for (ebx = ..; ebx < edi->size; ebx++ ) { // loc_7F627F
 #### <u>LEA Instruction</u>
 Load Effective address instruction loads the address of something. 
 for example, if eax is an address in memory, and we want to get address eax + ebx * 3
-```
+```nasm
 mov ecx, eax + ebx * 3   
 ; This is not valid 
 
@@ -470,7 +470,7 @@ mul cl                 ; AX = AL * CL
 mul dx                 ; DX:AX = AX * DX
 ```
 For example: 
-```
+```nasm
 mov eax, 3 
 mov ecx, 22222222h
 mul ecx
@@ -488,8 +488,8 @@ Very similar to MUL
 - _IMUL_ reg1, reg2/mem, imm -> reg1 = reg2/mem * imm
 #### DIV Instruction
 This is a division instruction that take the divisor as parameter and have the following form: 
-_DIV_ reg/mem. Depending on the divisor size, DIV will use _AX_, _DX_:_AX_ or _EDX_:_EAX_. the resulting quotient/reminder pair are stored in _AL_/_AH_ _AX_/_DX_ or _EAX_/_EDX
-```
+_DIV_ reg/mem. Depending on the divisor size, DIV will use _AX_, _DX_:_AX_ or _EDX_:_EAX_. the resulting quotient/reminder pair are stored in _AL_/_AH_ _AX_/_DX_ or _EAX_/_EDX_
+```nasm
 div ecx                  ; EDX:EAX / ECX quotient in EAX
 div cl                   ; AX / CL, quocient in AL, reminder in AH
 div dword ptr [esi+24h]  ; same as line one 
@@ -513,7 +513,7 @@ This instruction decrements the _ESP_ (Stack Pointer) <u>and then</u> writes dat
 #### POP Instruction
 This instruction increments the _ESP_ register <u>and then</u> reads data from the location in memory pointed by _ESP_. This instruction also takes a register to write the data to, and can read 1, 2 or 4 bytes with a prefix override. In practice the default value 4, is almost always used because OS requires stack to be double-word aligned.
 
-```
+```nasm
 ; initial ESP = 0xb20000
 mov eax, 0AAAAAAAAh
 mov ebx, 0BBBBBBBBh
@@ -619,7 +619,7 @@ call some_function
 ; this will read the eip register
 ```
 2. 
-```
+```nasm
 mov dword ptr [rsp], 0AABBCCDDh
 ret
 ; This will put AABBCCDD in the stack in ret will take it and put it on EIP
@@ -659,7 +659,7 @@ jz
 ```
 #### TEST Instruction
 Performs logical _AND_ between the two registers and changes the appropriate flags on the _EFLAGS_ register without saving the result
-```
+```nasm
 test eax, eax
 jnz
 ; jmp if eax != 0 
@@ -719,7 +719,182 @@ if (*esi != 0) {
 }
 return; 
 ```
+#### Switch-Case
+A switch-case block is a sequence of if/else statements 
+```C
+switch (ch) {
+	case 'c':
+		handle_C();
+		break;
+	case 'h':
+		handle_H();
+		break;
+	default:
+		break;
+}
+domore();
 
+// Same as 
+
+if (ch == 'c') {
+	handle_C();
+} else if (ch == 'h') {
+	handle_H();
+}
+domore();
+```
+Hence, the machine code translation will be a series if/else. The following simple example illustrates the idea:
+```nasm
+push ebp
+mov ebp, esp
+; start of a function
+
+mov eax, [ebp+8]
+; load variable from the stack
+
+sub eax, 41h
+jz short loc_caseA
+; check eax == 'A' == 0x41
+
+dec eax
+jz short loc_caseB
+; check if eax == 'B' == 0x42
+; it it was bigger then 0x41, and removing one will make it 0,
+; the number it is equal to was 0x41
+
+dec eax
+jz short loc_caseC
+; check if eax == 'C' == 0x43
+
+mov al, 5Ah
+movzx eax, al
+; move the 'Z' (0x5A) to the al register
+; transfer al to eax, and because eax is 
+; a larger register, pad it with zeros
+
+pop ebp
+ret
+
+loc_caseC:
+mov al, 43h
+movzx eax, al
+pop ebp  
+retn
+; move 'C' == 0x43 to the return value and return
+
+loc_caseB:
+mov al, 42h
+movzx eax, al
+pop ebp
+ret
+; move 'B' == 0x42 to the return value and return
+
+loc_caseA:
+mov al, 41h
+movzx eax, al
+pop ebp
+ret
+; move 'A' == 0x41 to the return value and return
+```
+Matching C Code
+```C
+char hex_to_ascii(int hex) {
+	char result;
+	switch (hex) {
+		case 0x41:
+			result = 'A';
+			break;		
+
+		case 0x42:
+			result = 'B';
+			break;
+		
+		case 0x43:
+			result = 'C';
+			break;
+
+		default:
+			result = 'Z';
+			break;
+	}
+	return result;
+}
+```
+Real-life switch-case statements cab be more complex, and compilers commonly build a _jump table_ to reduce the number of comparisons and conditional jumps. 
+The jump table is an array addresses, each pointing to the handler for a specific case, This pattern can be observed in the following code: 
+```nasm
+cmp edi, 5
+ja short loc_10001141
+; if edi is greater the 5, jump 
+
+jmp ds:off_100011A4 [edi*4]
+; else jump to address in offset 100011A4 plus edi*4
+; looks like a view into an array
+
+loc_10001125:
+mov esi, 40h
+jmp short loc_10001145
+
+loc_1000112C:
+mov esi, 20h
+jmp short loc_10001145
+
+loc_100001133:
+mov esi, 38h
+jmp short loc_10001145
+
+loc_1000113A:
+mov esi, 30h
+jmp short loc_10001145
+
+loc 10001141:
+mov esi, [esp+0Ch]
+...
+
+; This is the jump table, each index is a location
+off_100011A4 
+dd offset loc_10001125
+dd offset loc_10001125
+dd offset loc_1000113A
+dd offset loc_1000112C
+dd offset loc_10001133
+dd offset loc_1000113A
+```
+Matching C code
+```C
+switch (edi) {
+
+	case 0:
+	case 1:
+		//goto loc_1001125
+		esi = 0x40;
+		break;
+
+	case 2:
+	case 5:
+		//goto loc_1000113A
+		esi = 0x30;
+		break;
+
+	case 3:
+		//goto loc_1000112C
+		esi = 0x20;
+		break;
+
+	case 4:
+		//goto loc_10001141
+		esi = 0x38;
+		break;
+
+	default:
+		esi = *(esp+0xC);
+		break;
+
+}
+```
+This method saves up on 10 additional instruction in this example to test each case and branch to the handler.
+#### Loops 
+At the machine level, loops are implemented using a combination of _Jcc_ and _JMP_ instructions. In other words, they are implemented using _if/else_ and _goto_ constructs. The best way to understand it is to rewrite a loop using only _if_, _else_ and _goto_
 ## <u>System Mechanism</u>
 ## <u>Walk Through</u>
 ## <u>Exercises</u>

@@ -16,7 +16,7 @@ Each node contains ->
 - Onboard networking
 - iDRAC port
 Nodes can include ->
-- Graphical Processing Units (GPU)
+DRS- Graphical Processing Units (GPU)
 - Smart Data  Processing Units (SmartDPU)
 - Fiber Channel Host Bus Adapter (HBA)
 - Optional network interfaces
