@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "df007a3278525082",
+        "id": "ab380676f444fc10",
         "type": "tabs",
         "children": [
           {
-            "id": "5b613ffdf5b4047d",
+            "id": "cc470a9f8cff522d",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -52,7 +52,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "stretc",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Reversing/Practical Reverse Engineering.md",
+                "file": "Cyber/Reversing/Practical Reverse Engineering.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,20 +104,6 @@
               },
               "icon": "links-coming-in",
               "title": "Backlinks for Practical Reverse Engineering"
-            }
-          },
-          {
-            "id": "75e40a24c015701f",
-            "type": "leaf",
-            "state": {
-              "type": "outgoing-link",
-              "state": {
-                "file": "Reversing/Practical Reverse Engineering.md",
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-going-out",
-              "title": "Outgoing links from Practical Reverse Engineering"
             }
           },
           {
@@ -139,10 +125,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Cyber/PWNABLE.md"
+                "file": "Cyber/Reversing/Practical Reverse Engineering.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of PWNABLE"
+              "title": "Outline of Practical Reverse Engineering"
             }
           },
           {
@@ -164,13 +150,27 @@
               "icon": "viewIcon",
               "title": "Markdown-Autocomplete"
             }
+          },
+          {
+            "id": "05d258ba677f2b0a",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Cyber/Reversing/Practical Reverse Engineering.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Practical Reverse Engineering"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 385.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -184,50 +184,46 @@
       "obsidian-markdown-formatting-assistant-plugin:Open Markdown Formatting Assistant": false
     }
   },
-  "active": "5b613ffdf5b4047d",
+  "active": "3aea1d7bcd998ce3",
   "lastOpenFiles": [
-    "Images/Pasted image 20241217172700.png",
-    "Images/Pasted image 20241216144309.png",
-    "Images/Pasted image 20241216195410.png",
+    "Pasted image 20250122195424.png",
     "Cyber/Pwnable.md",
     "Cyber/Reversing/Practical Reverse Engineering.md",
-    "Cyber/PWNABLE.md",
     "Virtualization/vSAN Planning and Deployment.md",
     "Virtualization/VxRail Concepts.md",
+    "Missions.md",
+    "Virtualization/VMware Fundamentals.md",
+    "Pasted image 20250120190115.png",
     "Images/Pasted image 20250120190239.png",
     "Images/Pasted image 20250120171025.png",
-    "Images/Pasted image 20250119145618.png",
-    "Images/Pasted image 20250119142114.png",
-    "Cyber",
-    "Virtualization/VMware Fundamentals.md",
-    "Virtualization",
-    "Storage/VxRail Concepts.md",
-    "Storage/Isilon Concepts.md",
-    "Storage/ECS Concepts.md",
-    "Storage",
-    "Images/Pasted image 20250115175058.png",
-    "Images/Pasted image 20250115165013.png",
-    "Images/Pasted image 20250115111041.png",
-    "Images/Pasted image 20250112161750.png",
-    "General/Networking.pdf",
-    "General/Linux.pdf",
-    "General/ISM.pdf",
-    "General",
-    "2025-01-10.md",
-    "Practical Malware Analysis - Summary.md",
     "Cyber/Reversing/Practical Malware Analysis - Summary.md",
     "Cyber/Reversing",
-    "2024-12-27.md",
+    "Cyber",
+    "Reversing/Practical Malware Analysis - Summary.md",
+    "Reversing/Practical Reverse Engineering.md",
+    "Images/Pasted image 20250119145618.png",
+    "Images/Pasted image 20250119142114.png",
+    "Storage/Isilon Concepts.md",
+    "Storage/PowerScale/PowerScale Administration.md",
+    "Storage/ECS Concepts.md",
+    "General/ISM.pdf",
+    "Images/Pasted image 20250115175058.png",
+    "Images/Pasted image 20250115165013.png",
+    "General/Linux.pdf",
+    "Storage",
+    "General/Networking.pdf",
+    "General",
+    "Images/Pasted image 20250115111041.png",
+    "Pasted image 20250109174851.png",
+    "Images/Pasted image 20250112161750.png",
     "conflict-files-obsidian-git.md",
-    "ECS Concepts.md",
+    "Virtualization",
+    "2024-12-27.md",
+    "Reversing",
     "Untitled 1.canvas",
     "Untitled.canvas",
-    "Networking.pdf",
-    "Untitled.md",
-    "PowerScale/PowerScale Concepts.md",
-    "PowerScale/PowerScale Administration.md",
     "PowerScale Concepts.md",
-    "PowerScale",
+    "Storage/PowerScale",
     "linux.md",
     "2024-12-16.md",
     "2024-12-15.md",

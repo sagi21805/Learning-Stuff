@@ -52,3 +52,19 @@ It also creates the VM home namespace, which is a container object that stores a
 After vSAN is enabled on the cluster, a single datastore is created. It appears as another type of datastore in the list of datastores that might be available, including Virtual Volume, VMFS, and NFS. A single vSAN datastore can provide different service levels for each virtual machine or each virtual disk. In a vCenter Server, storage characteristics of the vSAN datastore appear as a set of capabilities. 
 vSAN datastore has specific characteristics to consider.
 - vSAN provides a single vSAN datastore accessible to all hosts in the cluster, whether or not they contribute storage to the cluster. Each host can also mount any other datastores including Virtual Volumes, VMFS, or NFS
+# Building a vSAN Cluster
+## Choosing Architecure 
+<u>Original Storage Architecture</u> - is used for a wide range of storage devices, including flash, solid stated drives, and magnetic drives (HDD).
+<u>Express Storage Architecture</u> - is used for high performance NVMe based TLC flash devices and high performance networks 
+## vSAN Deployment Options
+### Single Site vSAN Cluster
+This type of site consists of a minimum of three hosts that are connected on the same Layer 2 network. 
+### Stretched vSAN Cluster
+This type provides resiliency against the loss of an entire site. The hosts in the vSAN are distributed evenly across two sites. The two sites must have latency that is lower then 5ms.
+
+# Requirements for Enabling vSAN
+## Storage Device 
+Must have at least 10% of the storage as cache 
+Must have at least 4 NVMe TLC devices
+## Host Memory
+vSAN Express Storage Architecture requires 512 GB host memory. The memory for the entire environment depends on the number of devices in the host's storage pool.
