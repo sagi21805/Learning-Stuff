@@ -59,3 +59,8 @@ The command to overflow it in the correct is
 (python3 -c 'import sys; sys.stdout.buffer.write(b"a"* 52 + b"\xbe\xba\xfe\xca\n")'; cat) | nc pwnable.kr 9000
 ```
 This command write 52 time the letter 'a' which overflows the buffer until the key (52 = 44 + 8), then we insert the bytes of the key in reverse, and we use the cat command so the session between us and the server will not close. then we forward it to the server with |, and we get the shell, in which we can write _cat flag_ to get the flag. 
+## Reversing flag.elf (flag)
+- Understand what is upx and how it works https://medium.com/@ankyrockstar26/unpacking-a-upx-malware-dca2cdd1a8de
+- Understand how to see more strings in IDA 
+- Understand when program is obfuscated (not seeing any strings)
+- Understand how to remotely debug IDA program from other 

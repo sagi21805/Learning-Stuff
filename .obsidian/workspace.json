@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Virtualization/vSAN Planning and Deployment.md",
+                "file": "Cyber/Pwnable.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "vSAN Planning and Deployment"
+              "title": "Pwnable"
             }
           }
         ]
@@ -52,7 +52,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "stretc",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -77,7 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 299.5026054382324
   },
   "right": {
     "id": "d7625e987285e65d",
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Virtualization/vSAN Planning and Deployment.md",
+                "file": "Cyber/Pwnable.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for vSAN Planning and Deployment"
+              "title": "Backlinks for Pwnable"
             }
           },
           {
@@ -125,10 +125,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Virtualization/vSAN Planning and Deployment.md"
+                "file": "Cyber/Pwnable.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of vSAN Planning and Deployment"
+              "title": "Outline of Pwnable"
             }
           },
           {
@@ -157,16 +157,16 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Virtualization/vSAN Planning and Deployment.md",
+                "file": "Cyber/Pwnable.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from vSAN Planning and Deployment"
+              "title": "Outgoing links from Pwnable"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -184,19 +184,20 @@
       "obsidian-markdown-formatting-assistant-plugin:Open Markdown Formatting Assistant": false
     }
   },
-  "active": "c85f83d263819f28",
+  "active": "5bcac7f5b4738a05",
   "lastOpenFiles": [
+    "Cyber/Reversing/Practical Malware Analysis.md",
     "Cyber/Reversing/Practical Reverse Engineering.md",
-    "Images/Pasted image 20250122195424.png",
-    "Cyber/Pwnable.md",
-    "Virtualization/vSAN Planning and Deployment.md",
     "Virtualization/VxRail Concepts.md",
+    "Cyber/Pwnable.md",
+    "Storage/Notes.md",
+    "Virtualization/vSAN Planning and Deployment.md",
+    "Images/Pasted image 20250122195424.png",
     "Missions.md",
     "Virtualization/VMware Fundamentals.md",
     "Pasted image 20250120190115.png",
     "Images/Pasted image 20250120190239.png",
     "Images/Pasted image 20250120171025.png",
-    "Cyber/Reversing/Practical Malware Analysis - Summary.md",
     "Cyber/Reversing",
     "Cyber",
     "Reversing/Practical Malware Analysis - Summary.md",
