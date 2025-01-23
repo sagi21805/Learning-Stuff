@@ -68,3 +68,34 @@ Must have at least 10% of the storage as cache
 Must have at least 4 NVMe TLC devices
 ## Host Memory
 vSAN Express Storage Architecture requires 512 GB host memory. The memory for the entire environment depends on the number of devices in the host's storage pool.
+## Cluster Requirements for vSAN
+Verity that a host cluster meets the requirements for enabling vSAN
+- All capacity devices, drives, and firmware versions in your vSAN configuration must be certified and listed in the vSAN section of _VMware Compatibility Guide_
+- A standard vSAN cluster must contain a minimum of three hosts that contribute capacity to the cluster. A two host vSAN cluster consists of two data host and an external witness host.
+## Software Requirements for vSAN
+Verify that the vSphere components in your environment meet the software version for vSAN. To use the full set of vSAN capabilities, the ESXi hosts that participate in vSAN clusters must be version 8.0 or later.
+## Networking Requirements
+Verify that the network infrastructure and the networking configuration on the ESXi hosts meet the minimum networking requirements for vSAN
+
+| Networking Component     | Requirement                                                                                                                                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Host Bandwidth           | Each host must have minimum bandwidth dedicated to vSAN                                                                                                                                |
+| Connection Between Hosts | - vSAN OSA: Dedicated 1 Gbps for hybrid configuration, dedicated or shared 10 Gbps for all-flash<br>-  vSAN ESA: Dedicated or shared 25 Gbps                                           |
+| Host Network             | Each host in the cluster, regardless of whether it contributes capacity, must have a VMkernel adapter for vSAN trafiic                                                                 |
+| IPv4 and IPv6 Support    | The vSAN network support both IPv4 and IPv6                                                                                                                                            |
+| Network Latency          | - Maximum of 1 ms RTT for single site cluster between all hosts<br>- Maximum of 5 ms RTT between the two main sites<br>- Maximum of 200 ms RTT from main site to the vSAN witness host |
+# Designing and Sizing vSAN Storage
+Plan capacity and cache based on the expected data storage consumption. 
+- <u>Plan Capacity in vSAN</u> - You can calculate the capacity of a vSAN datastore to accommodate the virtual machines (VMs) files in the cluster, and to handle failures and maintenance operations.
+- <u>Design Considerations for Flash Caching Devices in vSAN</u> - Plan the configuration of flash devices for vSAN cache and all-flash capacity to provide high-performance and required storage space and accommodate future growth.
+- <u>Design Consideration for Flash and Capacity Devices in vSAN</u> - Plan the configuration of flash capacity devices for vSAN all-flash configurations to provide high performance and required storage space, and to accommodate future growth.
+- <u>Design Considerations for Magnetic Disks in vSAN</u> - Plan the size and number of magnetic disks for capacity in hybrid configuration by following the requirements for storage space and performance.
+- <u>Design Consideration for Storage Controllers in vSAN</u> - Use storage controllers on the hosts of a vSAN cluster that best satisfy your requirements for performance and availability.
+## Planing Capacity in vSAN
+You can calculate the capacity of a vSAN datastore to accommodate the virtual machines (VMs) files in the cluster, and to handle failures and maintenance operations.
+## Raw Capacity 
+Use this formula to determine the raw capacity of a vSAN datastore. 
+$(NumberOfDiskGroups * AvarageSizeOfGroups) - vSANOverhead$
+## Failure to Tolerate
+When you plan the capacity of the vSAN datastore, not including the number of virtual machines and the size of their $VMDK$ Files 
+
