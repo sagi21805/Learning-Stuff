@@ -1103,7 +1103,34 @@ For the purpose of this discussion, exceptions can be classified into two catego
 <u>Fault</u> - correctable exception. For example, when the processor executes an instruction that references a valid memory address but the data is not present in main memory (it was paged out), a page fault exception is generated. The processor handles this by saving the current execution state, calling the page fault handler, to correct this exception (by paging the data).
 <u>Trap</u> - This is an exception that is caused by executing special kinds of instruction. For example the instruction SYSENTER causes the processor to begin executing the generic system call handler; after the handler is done, executing is resumed at the instruction immediately after SYSENTER. 
 The major difference is where execution resumes. Operating systems commonly implement system calls through the interrupt and exception mechanism.
-## <u>Walk Through</u>
+## <u>Summarizing Exercise </u>
+### <u>Walk-Through</u>
+### <u>Re-Decompile the Walk-Through</u>
+### <u>What is @number at a Function Name</u>
+### <u>Implementation of C Functions is ASM</u>
+#### strlen
+#### strchr
+#### memcpy
+#### memset 
+#### strcmp
+#### strset
+#### <u>Decompilation of Windows Functions </u>
+#### KeInitializeDpc
+#### KeInitializeApc
+#### ObFastDereferenceObject + Its Calling Convention
+#### KeInitializeQueue
+#### KeWaitForLockChainValid
+#### KeReadyThread
+#### KiInitializeTSS
+#### RtlValidateUnicodeString
+### Recover Functions From Sample H
+#### SUB_10BB6
+#### SUB_11732
+### Recover  SUB_1000CEA0 From Sample L
+### Why Can't User Modify CS to Change  Current Privilege Level
+### Read and Perform Virtual to Physical Translation
+### How Data Execution Prevention Works
+
 ## <u>Exercises</u>
 
 # x64

@@ -100,3 +100,10 @@ $(NumberOfDiskGroups * AvarageSizeOfGroups) - vSANOverhead$
 When you plan the capacity of the vSAN datastore, not including the number of virtual machines and the size of their $VMDK$ Files, you must consider **Failures To Tolerate** of the virtual machine storage policies for the cluster.
 The **Failures to Tolerate** has an important role when you plan and size storage capacity for vSAN. Based on the availability requirement of a virtual machine, the setting might result in doubled consumption or more, compared with the consumption of a virtual machine and its individual device.
 Example for this is using RAID
+## Capacity Sizing Guidelines
+- Keep the storage capacity balanced, to prevent rebalancing which accrues when the consumption on a single site reaches to more then 80%
+- Plan extra capacity to handle and prevent failure and provide replacements 
+- Enough storage to handle storage policy changes
+- If software checksum or deduplication is used, plan to have enough storage for the operational overhead.
+- Save enough storage for extra snapshots 
+## Disk Groups vs. Storage Pools
