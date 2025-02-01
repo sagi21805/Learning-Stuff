@@ -8,17 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "cc470a9f8cff522d",
+            "id": "56bff35953fb6922",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Virtualization/vSAN Planning and Deployment.md",
+                "file": "Cyber/Reversing/Extra Terms.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "vSAN Planning and Deployment"
+              "title": "Extra Terms"
             }
           }
         ]
@@ -40,7 +40,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -52,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "stdcall",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -125,10 +126,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Virtualization/vSAN Planning and Deployment.md"
+                "file": "Cyber/Reversing/Extra Terms.md",
+                "followCursor": false,
+                "showSearch": true,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of vSAN Planning and Deployment"
+              "title": "Outline of Extra Terms"
             }
           },
           {
@@ -139,16 +143,6 @@
               "state": {},
               "icon": "git-pull-request",
               "title": "Source Control"
-            }
-          },
-          {
-            "id": "5f2b78e25e86dc95",
-            "type": "leaf",
-            "state": {
-              "type": "side-panel-control-view",
-              "state": {},
-              "icon": "viewIcon",
-              "title": "Markdown-Autocomplete"
             }
           },
           {
@@ -163,6 +157,16 @@
               },
               "icon": "links-going-out",
               "title": "Outgoing links from Pwnable"
+            }
+          },
+          {
+            "id": "991716f3c7c33f8a",
+            "type": "leaf",
+            "state": {
+              "type": "side-panel-control-view",
+              "state": {},
+              "icon": "viewIcon",
+              "title": "Markdown-Autocomplete"
             }
           }
         ],
@@ -184,13 +188,28 @@
       "obsidian-markdown-formatting-assistant-plugin:Open Markdown Formatting Assistant": false
     }
   },
-  "active": "cc470a9f8cff522d",
+  "active": "56bff35953fb6922",
   "lastOpenFiles": [
     "Cyber/Reversing/Practical Reverse Engineering.md",
+    "Cyber/Reversing/Windows Functions.md",
+    "Cyber/Reversing/Practical Malware Analysis.md",
+    "Cyber/Reversing/Extra Terms.md",
+    "Storage/ECS Concepts.md",
+    "Pasted image 20250114095332.png.md",
+    "basef.exe.til",
+    "basef.exe.id2",
+    "basef.exe.nam",
+    "basef.exe.id1",
+    "basef.exe.id0",
+    "bases.exe",
+    "basef.exe",
+    "a.exe",
+    "Cyber/Pwnable.md",
+    "Images/Pasted image 20250201191632.png",
+    "t.o",
+    "t.c",
     "Virtualization/vSAN Planning and Deployment.md",
     "Storage/Extra Stuff.md",
-    "Cyber/Pwnable.md",
-    "Cyber/Reversing/Practical Malware Analysis.md",
     "Virtualization/VxRail Concepts.md",
     "Images/Pasted image 20250122195424.png",
     "Missions.md",
@@ -198,32 +217,20 @@
     "Pasted image 20250120190115.png",
     "Images/Pasted image 20250120190239.png",
     "Images/Pasted image 20250120171025.png",
-    "Cyber/Reversing",
-    "Cyber",
     "Reversing/Practical Malware Analysis - Summary.md",
     "Reversing/Practical Reverse Engineering.md",
     "Images/Pasted image 20250119145618.png",
     "Images/Pasted image 20250119142114.png",
     "Storage/Isilon Concepts.md",
     "Storage/PowerScale/PowerScale Administration.md",
-    "Storage/ECS Concepts.md",
-    "General/ISM.pdf",
     "Images/Pasted image 20250115175058.png",
     "Images/Pasted image 20250115165013.png",
-    "General/Linux.pdf",
-    "Storage",
-    "General/Networking.pdf",
-    "General",
     "Images/Pasted image 20250115111041.png",
-    "Pasted image 20250109174851.png",
     "conflict-files-obsidian-git.md",
-    "Virtualization",
     "2024-12-27.md",
-    "Reversing",
     "Untitled 1.canvas",
     "Untitled.canvas",
     "PowerScale Concepts.md",
-    "Storage/PowerScale",
     "linux.md",
     "2024-12-16.md",
     "2024-12-15.md",

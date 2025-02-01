@@ -341,7 +341,7 @@ mov ecx 0Eh
 rep movsb
 ```
 but this is inefficient, because it makes 15 reads instead of just 5. 
-SCAS (Scan String) and STOS (Store String)
+#### SCAS (Scan String) and STOS (Store String)
 This is another data movement instructions with implicit source and destination, and they can also operate on 1, 2 and 4 bytes.
 _SCAS_ is used to compare the _AL_/_AX_/_EAX_  registers with data at memory address _EDI_, and it automatically increments/decrements _EDI_ depending on _DF_ flag. _SCAS_ is commonly used with _REP_ to find a byte, word or double-word inside a buffer.
 For example C _strlen()_ function can be implemented like that ->
@@ -376,7 +376,7 @@ mov edi, esi
 ; set edi to the same address as esi
 
 rep stosd
-; write ecx * double-word bytes which in this case 36
+; write ecx * double-word bytes which in this case 36 bytes into edi
 ```
 
 This is equivalent to ->
@@ -1105,6 +1105,179 @@ For the purpose of this discussion, exceptions can be classified into two catego
 The major difference is where execution resumes. Operating systems commonly implement system calls through the interrupt and exception mechanism.
 ## <u>Summarizing Exercise </u>
 ### <u>Walk-Through</u>
+This is a summarizing _DLLMain_ routine with less the 100 assembly lines. This function applies almost every concept covered in the chapter above and It covers an important part
+The function ->
+```nasm
+BOOL __stdcall DllMain(HInstance hinstDLL, DWORD fdwReason, LPVOID lpvReserved) 
+_DLLMain@12 proc near
+push ebp
+mov ebp, esp
+sub esp, 130h
+; function start and allocate 0x130 bytes on the stack.
+
+push edi
+; save edi
+
+sidt fword ptr [ebp-8] 
+; writes the interrupt descriptor register table into a memory location 
+; information on that table on the link bellow
+
+mov eax, [ebp-6]
+; read from memory location ebp-6 into eax
+; when checking the structure of the IDT register and in little endien 
+; eax contains the base address of the IDT
+
+cmp eax, 8003F400h
+jbe short loc_10001C88
+; compare base with 0x8003F400 if eax is bellow or equal jump to loc_10001C88.
+
+cmp eax, 80047400h
+jnb short loc_10001C88 
+; comapre base with 0x80047400 if eax is above or equal jump to loc_10001C88
+
+; 8003F400h and 80047400h are not just any numbers
+; they are the base address of the IDT on windows XP
+; basically if the idt base address is valid, jump else return
+
+xor eax, eax
+; zero out eax for return status
+
+pop edi
+mov esp, ebp
+pop ebp
+retn 0Ch
+; return edi for what it was at the start of the function and restore the stack
+
+loc_10001C88:
+; jump here if [ebp-6] which is eax is between 0x8003F400 and 0x80047400
+; which means the base of the idt is valid, and running on windows XP 
+
+xor eax, eax 
+; zero out eax
+
+mov ecx, 49h
+; move 73 (0x49) to ecx, probably a conter
+
+lea edi, [ebp-12Ch]
+;load address of ebp-300 into edi
+
+mov dword ptr [ebp-130h], 0
+; load zero into ebp-304 
+
+push eax
+push 2
+; push to the stack eax (0) and 2 
+; will be used for the function call bellow
+
+rep stosd
+; write the value of eax (0) into edi ecx (73) times
+; because it writes double words, it zeros out [ebp-300] - [ebp-8]
+
+call CreateToolhelp32Snapshot
+; call the CreateToolhelp32Snapshot function 
+; first parameter 2, second parameter eax (0)
+; 2 is flag TH32CS_SNAPPROCESS which is accroding to docs ->
+; Includes all processes in the system in the snapshot. 
+; To enumerate the processes, see Process32First
+; If the function succeeds, it returns an open handle to the specified snapshot.
+; Now eax is an open handle to the snapshot or INVALID_HANDLE_VALUE which is -1
+
+mov edi, eax
+; save the handle on edi
+
+cmp edi, 0FFFFFFFFh 
+jnz short loc_10001CB9
+; if the function above returned a valid value and not INVALID_HANDLE_VALUE
+; jump to location loc_10001CB9 
+; which means a snapshot of the whole system was taken 
+
+xor eax, eax
+pop edi
+mov esp, ebp
+pop ebp
+; zero out eax, and restore edi and the stack frame
+
+retn 0Ch
+; non zero return value which can help debug errors
+
+loc_10001CB9:
+; if jumped here, a snapshot of all the processes was taken
+; eax is the handle for that snapshot
+; the address of the handle is also on edi
+
+lea eax, [ebp-130h]
+push esi
+push eax
+push edi
+mov dword ptr [ebp-130h], 128h
+call Process32First
+test eax, eax
+jz short loc_10001D24 (line 70)
+mov esi, ds:_stricmp
+lea ecx, [ebp-10Ch]
+push 10007C50h
+push ecx
+call esi ; _stricmp
+add esp, 8
+test eax, eax
+jz short loc_10001D16 (line 66)
+
+loc_10001CF0:
+lea edx, [ebp-130h]
+push edx
+push edi
+call Process32Next
+test eax, eax
+jz short loc_10001D24
+lea eax, [ebp-10Ch]
+push 10007C50h
+push eax
+call esi ; _stricmp
+add esp, 8
+test eax, eax
+jnz short loc_10001CF0
+
+loc_10001D16:
+mov eax, [ebp-118h]
+mov ecx, [ebp-128h]
+jmp short loc_10001D2A
+
+loc_10001D24:
+mov eax, [ebp+0Ch]
+mov ecx, [ebp+0Ch]
+
+loc_10001D2A:
+cmp eax, ecx
+pop esi
+jnz short loc_10001D38
+xor eax, eax
+pop edi
+mov esp, ebp
+pop ebp
+retn 0Ch
+
+loc_10001D38:
+mov eax, [ebp+0Ch]
+dec eax
+jnz short loc_10001D53
+push 0
+push 0
+push 0
+push 100032D0h
+push 0
+push 0
+call ds:CreateThread
+
+loc_10001D53:
+mov eax, 1
+pop edi
+mov esp, ebp
+pop ebp
+retn 0Ch
+
+_DllMain@12 endp
+```
+[[Extra Terms#Interrupt Descriptor Table|sidt]]
 ### <u>Re-Decompile the Walk-Through</u>
 ### <u>What is @number at a Function Name</u>
 ### <u>Implementation of C Functions is ASM</u>
@@ -1139,3 +1312,5 @@ The major difference is where execution resumes. Operating systems commonly impl
 ## <u>Canonical Address</u>
 ## <u>Function Invocation</u>
 ## <u>Exercises</u>
+
+[^1]: Hello Wor
