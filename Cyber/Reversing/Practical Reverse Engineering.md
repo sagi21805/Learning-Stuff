@@ -1159,7 +1159,7 @@ mov ecx, 49h
 ; move 73 (0x49) to ecx, probably a conter
 
 lea edi, [ebp-12Ch]
-;load address of ebp-300 into edi
+; load address of ebp-300 into edi
 
 mov dword ptr [ebp-130h], 0
 ; load zero into ebp-304 
@@ -1206,29 +1206,68 @@ loc_10001CB9:
 ; the address of the handle is also on edi
 
 lea eax, [ebp-130h]
+; load the address of the start of the struct of tagPROCESSENTRY32
+
 push esi
+; not sure why this is pushed, the function takes two arguments
+; maybe to save esi
+
 push eax
 push edi
+; push the second and first argument of the function to the stack 
+
 mov dword ptr [ebp-130h], 128h
+; set the size of the struct to 296 bytes
+
 call Process32First
+; call the function Process32First 
+; which Retrieves information about the first process in a system snapshot
+
 test eax, eax
-jz short loc_10001D24 (line 70)
+jz short loc_10001D24 
+; check if return value is 0 (False) if so jump to loc_10001D24
+
 mov esi, ds:_stricmp
+; move to esi the address of stricp
+; this function compares strings without case sensivity
+; which means "TEST" == "test"
+
 lea ecx, [ebp-10Ch]
+; we know that ebp-0x130 points to tagPROCESSENTRY32
+; which means this is a field in this structure
+; when taking the offset we can see it is the szExeFile[MAX_PATH] field
+; which is a char* (string) field of the name of the executealbe
+
 push 10007C50h
 push ecx
 call esi ; _stricmp
 add esp, 8
+; the arguments for the _stricmp function are two strings
+; 0x10007C50 is the address of the first one (known to be 'explorer.exe')
+; ecx which is the name of the exe of the process is string two
+; then the stack is restored per to cdecl calling convention
+
 test eax, eax
-jz short loc_10001D16 (line 66)
+jz short loc_10001D16 
+; if the strings match, jump to loc_10001D16
 
 loc_10001CF0:
+; if strings don't match continue execution here
+
 lea edx, [ebp-130h]
+; load the address of the start of the struct of tagPROCESSENTRY32
+
 push edx
 push edi
 call Process32Next
+; push the pointer to the process entry and the snapshot to the stack
+; and use them as arguments to Process32Next 
+
 test eax, eax
 jz short loc_10001D24
+; check if a process has been copied to the buffer
+; if so continue execution, if it was not copied jump to loc_10001D24
+
 lea eax, [ebp-10Ch]
 push 10007C50h
 push eax
@@ -1236,6 +1275,9 @@ call esi ; _stricmp
 add esp, 8
 test eax, eax
 jnz short loc_10001CF0
+; similar code block to what we have seen before
+; check if the executable name is 'explorer.exe' 
+; if the strings don't match do the whole block agains (while)
 
 loc_10001D16:
 mov eax, [ebp-118h]
