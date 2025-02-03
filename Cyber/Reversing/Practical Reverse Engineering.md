@@ -1281,27 +1281,46 @@ jnz short loc_10001CF0
 
 loc_10001D16:
 mov eax, [ebp-118h]
+; move the field thParentProcessID to eax
 mov ecx, [ebp-128h]
+; move the field thProcessID to ecx
 jmp short loc_10001D2A
 
 loc_10001D24:
 mov eax, [ebp+0Ch]
 mov ecx, [ebp+0Ch]
+; move the same value to eax and ecx 
 
 loc_10001D2A:
 cmp eax, ecx
 pop esi
 jnz short loc_10001D38
+; this cmp and jump checks if we came from loc_10001D16 or loc_10001D24
+; if from loc_10001D16 fields don't match, so
 xor eax, eax
 pop edi
 mov esp, ebp
 pop ebp
 retn 0Ch
+; if got here from 10001D24 exist the funtion and restore the stack frame
 
 loc_10001D38:
+; eax and ecx contains the thParnetProcessID and thProcessID
 mov eax, [ebp+0Ch]
+; this is the fdwReason argument in the function
+; each argument is 32bit wide so the stack of the function is like this ->
+; ebp+0 -> saved ebp
+; ebp+4 -> saved return address
+; ebp+8 -> first argument (hinstDLL)
+; ebp+C -> second argument (fdwReason)
+
 dec eax
 jnz short loc_10001D53
+; The DLLMain function is called when a DLL is un/loaded into a process memory
+; the dec eax, and jump checks if it is a fwdReason of type DLL_PROCESS_ATTACH
+; This parameter checks if it is loaded.
+; if it is not loaded, the funciton jumps to loc_10001D53
+
 push 0
 push 0
 push 0
@@ -1309,6 +1328,15 @@ push 100032D0h
 push 0
 push 0
 call ds:CreateThread
+; if the DLL is loaded and attached to the process it creates a thread
+; with parameters 
+; lpThreadID            = NULL
+; dwCreationFlags       = NULL
+; lpParameter           = NULL
+; lpStartAddress        = 0x100032D0
+; dwStackSize           = NULL
+; LPSECURITY_ATTRIBUTES = NULL
+; This creates a thread on the process that starts the function*- at 0x100032D0 
 
 loc_10001D53:
 mov eax, 1
@@ -1316,10 +1344,62 @@ pop edi
 mov esp, ebp
 pop ebp
 retn 0Ch
+; this just exists the function and restores the stack frame and edi
 
 _DllMain@12 endp
 ```
-[[Extra Terms#Interrupt Descriptor Table|sidt]]
+This can be converted to the following C code; 
+```C
+typedef struct IDTR {
+	short limit;
+	int base;
+}
+
+typedef struct tagPROCESSENTRY32 {
+  DWORD     dwSize;
+  DWORD     cntUsage;
+  DWORD     th32ProcessID;
+  ULONG_PTR th32DefaultHeapID;
+  DWORD     th32ModuleID;
+  DWORD     cntThreads;
+  DWORD     th32ParentProcessID;
+  LONG      pcPriClassBase;
+  DWORD     dwFlags;
+  CHAR      szExeFile[MAX_PATH]; 
+} PROCESSENTRY32;
+
+Bool __stdcall DllMain(HInstance hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
+	IDTR idtr;
+	__sidt(&idtr); // write the data of the sidt instruction to the struct
+	if (idtr.base > 0x80047400 || idtr.base <= 0x8003F400) {
+		HANDLE h = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+		PROCESSENTRTY32 entry;
+		memset(&entry, 0, sizeof(entry));
+		if (h != INVALID_HANDLE_VALUE){
+			entry.dwSize = sizeof(entry); //i.e 0x128 bytes
+			bool copied = Process32First(&h, &entry);
+			if (copied) {
+				if (fwdReson != DLL_PROCESS_ATTACH) { return 12; }
+				int status = _stricmp(entry.szExeFile, "explorer.exe");
+				while (status != 0 && copied) {
+					copied = Process32Next(&h, &entry);
+					status = _stricmp(entry.szExeFile, "explorer.exe");
+					if (!copied) { return;}
+				}
+				CreateThread(NULL, NULL, 0x100032D0, NULL, NULL, NULL);
+				// 0x100032D0 Probably address to malicious function
+			}
+		}
+		return 12;
+	}
+	// if address is not valid return
+	return 12;
+}
+```
+This code basically:
+1. Checks if the IDT of the system is valid for x86 windows xp
+2. Check if the user logged in, i.e explorer.exe is running
+3. Run malicious program if the two terms above are true
 ### <u>Re-Decompile the Walk-Through</u>
 ### <u>What is @number at a Function Name</u>
 ### <u>Implementation of C Functions is ASM</u>
