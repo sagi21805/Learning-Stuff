@@ -256,7 +256,7 @@ while (1) {
 	if (ZF == 1) || (ecx == 0) {break}
 }
 ```
-#### <u>MOVS Instruction</u>
+	#### <u>MOVS Instruction</u>
 These instructions move data with 1, 2 or 4  granularity between two memory addresses. They implicitly use the _EDI/ESI_ as the destination/source addresses respectively. In addition they also update the source and destination addresses automatically. If the DF (direction flat) is 0 addresses are decremented otherwise incremented. Typically these instructions are used to copy memory. In some cases they are coming with the _REP_ prefix which says they will repeat _ECX_ times.
 ```nasm
 mov esi, offset _RamdiskBootGuid
@@ -442,7 +442,7 @@ This program gets a cstring in [ebp+8] and a constant in [ebp+C], it calculates 
 These are fundamental mathematical operations such as addition, subtraction, multiplication, and division which are natively supported by the instruction set. Bit-level operations such as _AND_, _OR_, _XOR_, _NOT_ and left and right shift operations also have native corresponding instructions.  With the exception of multiplication and division, the remaining instructions are straightforward. in terms of usage
 ```nasm
 add esp, 14h         ; esp = esp + 0x14
-sub ecx, eax         ; exc = ecx - eax
+sub ecx, eax         ; ecx = ecx - eax
 sub esp, 0Ch         ; esp = esp - 0xC
 inc ecx              ; ecx = ecx + 1
 dec edi              ; edi = edi - 1
@@ -1348,6 +1348,7 @@ retn 0Ch
 
 _DllMain@12 endp
 ```
+### Re-Decompile the Walk-Through
 This can be converted to the following C code; 
 ```C
 typedef struct IDTR {
@@ -1400,16 +1401,30 @@ This code basically:
 1. Checks if the IDT of the system is valid for x86 windows xp
 2. Check if the user logged in, i.e explorer.exe is running
 3. Run malicious program if the two terms above are true
-### <u>Re-Decompile the Walk-Through</u>
 ### <u>What is @number at a Function Name</u>
+In 32bit windows, compilers can provide information about the [[Practical Reverse Engineering#<u>Calling Convention</u>|Calling Convention]] of a certain function and the size in bytes of the arguments it gets in decimal
+
+| Calling Convention | Decoration                                                                                                                     |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| **`__cdecl`**      | Leading underscore (**`_`**)                                                                                                   |
+| **`__stdcall`**    | Leading underscore (**`_`**) and a trailing at sign (**`@`**) followed by the number of bytes in the parameter list in decimal |
+| **`__fastcall`**   | Leading and trailing at signs (**`@`**) followed by a decimal number representing the number of bytes in the parameter list    |
+| **`__vectorcall`** | Two trailing at signs (**`@@`**) followed by a decimal number of bytes in the parameter list                                   |
+Examples
+```C
+int __cdecl function(int a, int b, int c); // In assembly _function
+int __stdcall function(int a, int b, int c); // In assembly _function@12
+int __fastcall function(int a, int b, int c); // In assembly @function@12
+int __vectorcall function(int a, int b, int c); // In assembly function@@12
+```
 ### <u>Implementation of C Functions is ASM</u>
-#### strlen
-#### strchr
-#### memcpy
-#### memset 
-#### strcmp
-#### strset
-#### <u>Decompilation of Windows Functions </u>
+[[simple_functions.s|strlen]]
+[[simple_functions.s|strchr]]
+[[simple_functions.s|memcpy]]
+[[simple_functions.s|memset]]
+[[simple_functions.s|strcmp]]
+[[simple_functions.s|strset]]
+### <u>Decompilation of Windows Functions </u>
 #### KeInitializeDpc
 #### KeInitializeApc
 #### ObFastDereferenceObject + Its Calling Convention
