@@ -1,20 +1,24 @@
 {
   "main": {
-    "id": "32d14122ab0d17d0",
+    "id": "e680997ebbbd9bd1",
     "type": "split",
     "children": [
       {
-        "id": "ab380676f444fc10",
+        "id": "3c16246283633643",
         "type": "tabs",
         "children": [
           {
-            "id": "56bff35953fb6922",
+            "id": "94f117e9a17f0a9e",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "Containers.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Containers"
             }
           }
         ]
@@ -23,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "b6e7b55ec95c0c2e",
+    "id": "d3dea8cfa6109efd",
     "type": "split",
     "children": [
       {
-        "id": "fbf6abe4af3ee569",
+        "id": "c12ceb99b2a870e3",
         "type": "tabs",
         "children": [
           {
-            "id": "3aea1d7bcd998ce3",
+            "id": "da46e6287b45d5e7",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -44,12 +48,12 @@
             }
           },
           {
-            "id": "2776378f64a7dcb7",
+            "id": "1792b36711397843",
             "type": "leaf",
             "state": {
               "type": "search",
               "state": {
-                "query": "stdcall",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -61,7 +65,7 @@
             }
           },
           {
-            "id": "f7aee1b94aacaa5b",
+            "id": "bf8bd26ad465c808",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -74,23 +78,23 @@
       }
     ],
     "direction": "horizontal",
-    "width": 299.5026054382324
+    "width": 300
   },
   "right": {
-    "id": "d7625e987285e65d",
+    "id": "2f792d0946dade53",
     "type": "split",
     "children": [
       {
-        "id": "189a51df68661a62",
+        "id": "a7d266d20a70ff5f",
         "type": "tabs",
         "children": [
           {
-            "id": "cd1c09e6a3f85298",
+            "id": "166d1c126f2f7385",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Cyber/Pwnable.md",
+                "file": "Containers.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,38 +104,55 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Pwnable"
+              "title": "Backlinks for Containers"
             }
           },
           {
-            "id": "c4faad3c2457ce3b",
+            "id": "f8f71187c6426aa0",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Containers.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Containers"
+            }
+          },
+          {
+            "id": "f7764e10e5edb7b4",
             "type": "leaf",
             "state": {
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-tags",
               "title": "Tags"
             }
           },
           {
-            "id": "c85f83d263819f28",
+            "id": "022d68e2d18bc238",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
+                "file": "Containers.md",
                 "followCursor": false,
-                "showSearch": true,
+                "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Containers"
             }
           },
           {
-            "id": "5bcac7f5b4738a05",
+            "id": "99c63951363c611a",
             "type": "leaf",
             "state": {
               "type": "git-view",
@@ -139,37 +160,13 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
-          },
-          {
-            "id": "05d258ba677f2b0a",
-            "type": "leaf",
-            "state": {
-              "type": "outgoing-link",
-              "state": {
-                "file": "Cyber/Pwnable.md",
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-going-out",
-              "title": "Outgoing links from Pwnable"
-            }
-          },
-          {
-            "id": "991716f3c7c33f8a",
-            "type": "leaf",
-            "state": {
-              "type": "side-panel-control-view",
-              "state": {},
-              "icon": "viewIcon",
-              "title": "Markdown-Autocomplete"
-            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 385.5
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -184,54 +181,8 @@
       "vscode-editor:Create Code File": false
     }
   },
-  "active": "5bcac7f5b4738a05",
+  "active": "022d68e2d18bc238",
   "lastOpenFiles": [
-    "Cyber/Reversing/Practical Reverse Engineering.md",
-    "Cyber/Reversing/Practical Malware Analysis.md",
-    "Cyber/Reversing/Extra Terms.md",
-    "Cyber/Reversing/Code/simple_functions.s",
-    "Cyber/Reversing/Code/a.exe",
-    "Cyber/Reversing/Code/simple_functions.o",
-    "simple_functions.o",
-    "Cyber/Reversing/Windows Functions.md",
-    "strlen.o",
-    "a-test.o",
-    "a-test.s",
-    "a-test.i",
-    "test.c",
-    "Cyber/Reversing/Code/simple_functions.c",
-    "Storage/Extra Stuff.md",
-    "Untitled.md",
-    "Storage/Isilon Concepts.md",
-    "Cyber/Pwnable.md",
-    "Storage/ECS Concepts.md",
-    "Pasted image 20250114095332.png.md",
-    "Images/Pasted image 20250201191632.png",
-    "Virtualization/vSAN Planning and Deployment.md",
-    "Virtualization/VxRail Concepts.md",
-    "Images/Pasted image 20250122195424.png",
-    "Missions.md",
-    "Virtualization/VMware Fundamentals.md",
-    "Pasted image 20250120190115.png",
-    "Images/Pasted image 20250120190239.png",
-    "Images/Pasted image 20250120171025.png",
-    "Reversing/Practical Malware Analysis - Summary.md",
-    "Reversing/Practical Reverse Engineering.md",
-    "Images/Pasted image 20250119145618.png",
-    "Images/Pasted image 20250119142114.png",
-    "Storage/PowerScale/PowerScale Administration.md",
-    "Images/Pasted image 20250115175058.png",
-    "Images/Pasted image 20250115165013.png",
-    "Images/Pasted image 20250115111041.png",
-    "conflict-files-obsidian-git.md",
-    "2024-12-27.md",
-    "Untitled 1.canvas",
-    "Untitled.canvas",
-    "PowerScale Concepts.md",
-    "linux.md",
-    "2024-12-16.md",
-    "2024-12-15.md",
-    "Untitled 2.md",
-    "Untitled 1.md"
+    "Containers.md"
   ]
 }
