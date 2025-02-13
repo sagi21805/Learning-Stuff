@@ -269,3 +269,93 @@ This is a tool specifically designed to build Open Container Initiative (OCI) im
 This instruction initializes a new build and sets the base image for the subsequent instructions, every docker file must start with this instruction
 
 ## Multi-Stage Build
+Multi-Stage build uses multiple from statement in the image, for example, if the application is compilable, firstly, the source code and dependencies can be installed and then compile the code, then, start a FROM scratch, instruction after the compilation, copy the compiled application and libraries, and then you can just delete all dependencies and source code for a really small container.
+
+### CMD vs ENTRYPOINT
+The default values in CMD can be changed when running the docker file, including the running executable from the docker run cli. While in ENTRYPOINT, the arguments are given from the CMD or default ones, but the executable is given from the ENERYPOINT, the arguments can be overridden.
+```dockerfile
+FROM ubuntu
+ENTERYPOINT ["echo"]
+CMD ["Hello World"]
+```
+The argument "Hello World" can be overridden to print something else but the command <u>can't be overidden</u> 
+```dockerfile
+FROM ubuntu
+CMD ["echo", "Hello World"]
+```
+In this example the command can be overridden to run something else, which is not recommended.
+The combination of CMD and ENTRYPOINT makes CMD to add arguments to the entry point.
+
+### Basic Docker Commands
+
+<u>build</u> -> Create a docker image from the docker file
+```bash
+docker build -t [IMAGE_TAG]:[TAG] [PATH_TO_DOCKERFILE]
+docker build -t mycustomimage:v1 .
+```
+<u>run</u> -> This runs a docker image in a container
+<u>Ps</u> -> List of running containers and their state, similar to ps command on linux
+<u>Images</u> -> List all the installed images on the local machine. 
+<u>Exec</u> -> This command is used to execute some command inside the container. 
+```bash
+docker exec -it [CONTAINER_ID] [COMMAND]
+docker exec -it aaaaaaa /bin/bash
+# This command is used to execute a shell inside the container
+# The -it flag is interactive mode
+```
+<u>Logs</u> -> get logs from a certain container, the --follow will print in live the STDOUT and STDERR of the container to the local terminal
+<u>Stop</u> -> This command will stop the running container
+<u>Start</u> -> Start images that have been stopped or existed, unlike run which is only for new images
+<u>Inspect</u> -> Get low level and detailed information about a container
+<u>Info</u> -> This command displays information about the docker installation itself and the system running it.
+<u>Saved</u -> Save and image as a tar archive so it can be transported efficiently, then can be loaded with docker load
+<u>Load</u> -> load a tar archive of a docker image, saved with docker save.
+
+## Container Layers
+Docker build itself on top of layers, each layer has cache and an 'intermediate image', the intermediate image takes more space, but can be cached for faster builds. the cache works by hashing the content so the same content will be reused in next builds. Once a layer is created it can't be modified and a new layer needs to be created.
+#### Scratch Image
+This is the most minimal image that can be created, and this is the base ancestor for all other images. This is actually an empty image, this can be used for a statically compiled executable which is self contained so it doesn't need anything else to run. This is efficient for a multi-stage build the in the first stage it builds the code and links it statically, and then runs the static executable in a scratch image.
+
+### Docker Images Best Practices
+#### Use Multi-Stage Builds 
+This can help reducing the final size of the image, for example by using scratch image 
+#### Create Reusable Stages
+If multiple Images has a lot in common, creating reusable layers that can be cached can drastically improve build time, and storage usage.
+#### Choose The Right Base Image
+When choosing an image, make sure that it contains only what is needed for the application to run, and nothing more, and also that it is from a trusted host 
+#### Rebuild Images Often
+Docker images are immutable, and building an image is basically taking a snapshot of that image at the moment, so it is recommended to build often and with --no-cache, so the image have the latest and most correct dependencies.
+#### Use .dockerignore
+This is common to copy files to the image with ```COPY . .``` This can copy garbage files to the image and make it bigger, the .dockerignore file makes it so files that are listed there will not be copied.
+#### Create Ephemeral Container
+This is containers that they can be stopped and destroyed at any given moment, and can be rebuilt and replaced with very minimal configuration.
+#### Decouple Applications
+Each container should have only one concern, this makes the application much more scalable, because containers can be reused. For instance, web application should have one container for the application, one for DB and one for in-memory or cache. 
+#### Sort Multi-Line arguments
+```dockerfile
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  bzr \
+  cvs \
+  git \
+  mercurial \
+  subversion \
+  && rm -rf /var/lib/apt/lists/*
+```
+This helps in maintenance of the file, and for other using, and changing the file.
+#### Leverage Build Cache
+Every instruction in the docker image can be reused from other layer, if you know multiple images have similar dependencies, cache can be reused and thus save storage and memory
+#### Pin Base Image Versions 
+If the same base image is important for execution pin the version
+```dockerfile
+FROM alpine:3.19
+```
+This may be problematic if the exact same base image is needed, because the developer can change what is inside that tag, or different patches like 3.19.3 or 3.19.4 can be used, to make sure you get the exact same image the digest hash can be used.
+```dockerfile
+FROM alpine:3.19@sha256:13b7e62e8df80264dbb747995705a986aa....
+```
+This makes sure that the same image is used.
+#### Build and Test with CI
+Building and testing the image in CI makes sure that the production branch has a working version that is buildable, and can be used by customers. 
+
+## Open Container Initiative
+This is an open image format that can be used to build container images, this format can be used to build docker images, and create images in other platforms such as buildha, kaniko, podman etc..
