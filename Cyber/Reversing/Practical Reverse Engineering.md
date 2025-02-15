@@ -1418,21 +1418,21 @@ int __fastcall function(int a, int b, int c); // In assembly @function@12
 int __vectorcall function(int a, int b, int c); // In assembly function@@12
 ```
 ### <u>Implementation of C Functions is ASM</u>
-[[simple_functions.s|strlen]]
-[[simple_functions.s|strchr]]
-[[simple_functions.s|memcpy]]
-[[simple_functions.s|memset]]
-[[simple_functions.s|strcmp]]
-[[simple_functions.s|strset]]
+[[simple_linux.s|strlen]]
+[[simple_linux.s|strchr]]
+[[simple_linux.s|memcpy]]
+[[simple_linux.s|memset]]
+[[simple_linux.s|strcmp]]
+[[simple_linux.s|strset]]
 ### <u>Decompilation of Windows Functions </u>
-#### KeInitializeDpc
-#### KeInitializeApc
-#### ObFastDereferenceObject + Its Calling Convention
-#### KeInitializeQueue
-#### KeWaitForLockChainValid
-#### KeReadyThread
-#### KiInitializeTSS
-#### RtlValidateUnicodeString
+[[KeInitializeDpc.c|KeInitializeDpc]]
+KeInitializeApc
+ObFastDereferenceObject + Its Calling Convention
+KeInitializeQueue
+KeWaitForLockChainValid
+KeReadyThread
+KiInitializeTSS
+RtlValidateUnicodeString
 ### Recover Functions From Sample H
 #### SUB_10BB6
 #### SUB_11732
@@ -1444,6 +1444,11 @@ int __vectorcall function(int a, int b, int c); // In assembly function@@12
 ## <u>Exercises</u>
 
 # x64
+## Calling Conventions
+The x64 architecture, has much less calling conventions. 
+In <u>Windows x64</u> there is actually only one calling convention. The first 4 parameters are passed through _RCX, RDX, R8, R9_ and the rest are on the stack from right to left.
+And on <u>Linux x64</u> the first 6 parameters are passed through registers _RDI, RSI, RDX, RCX, R8, R9_
+
 ## <u>Register Set and Data Types</u>
 ## <u>Data Movement</u>
 ## <u>Canonical Address</u>
