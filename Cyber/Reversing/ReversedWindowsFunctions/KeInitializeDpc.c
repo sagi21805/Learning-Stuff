@@ -1,31 +1,59 @@
- union _KDPC_Union1 {                                       // XREF: sub_1402E8960+392/w
-                                        // sub_14027DA20+1C4066/w ...
+typedef unsigned char UCHAR;
+typedef unsigned long ULONG;
+typedef unsigned short USHORT;
+typedef void* SINGLE_LIST_ENTRY;
+typedef ULONG KAFFINITY;
+typedef void* PVOID; 
+typedef void* PKDEFERRED_ROUTINE;
+
+typedef union KDPC {                                   
     ULONG TargetInfoAsUlong;
-    struct _KDPC_Union2;
+    struct KDPCEX;
 };
-struct _KDPC_Union2 {                                       // XREF: _KDPC::$6963FFE55BC4627E7AE37E9650A61BA0/r
+
+typedef struct KDPCEX {                                       
     UCHAR Type;
     UCHAR Importance;
     volatile USHORT Number;
 };
 
-typedef struct _KDPC { // size=0x40
+// size=0x40
+typedef struct _KDPC { 
+    union KDPC Info; // 0x0-0x8
 
-    union _KDPC                 
-    // 0x0-0x8
-    SINGLE_LIST_ENTRY  DpcListEntry
-    // 0x0-0x10
+    // 0x8-0x10
     // This is a pointer to a LinkedList entry
-    KAFFINITY          ProcessorHistory
-    // 0x0-0x18
+    SINGLE_LIST_ENTRY DpcListEntry;
+    
+    // 0x10-0x18
     // Mask that signals wich CPU was used
     // 00000100 -> third cpu was used
-    PKDEFERRED_ROUTINE DeferredRoutine
-    // Pointer to the routine function, which takes the bellow arguments
-    //
-    PVOID              DeferredContext
-    PVOID              SystemArgument1
-    PVOID              SystemArgument2    
+    KAFFINITY ProcessorHistory;
 
-    PVOID              DpcData
+    //0x18-20
+    // Pointer to the routine function, which takes the bellow arguments
+    PKDEFERRED_ROUTINE DeferredRoutine;
+    
+    //0x20-28
+    PVOID DeferredContext;
+    //0x28-30
+    PVOID SystemArgument1;
+    //0x30-38
+    PVOID SystemArgument2;   
+    //0x38-40
+    PVOID DpcData;
+
+} *PRKDPC;
+
+
+// first argument -> rcx
+// second argument -> rdx
+// third arguemnt -> r8
+void KeInitializeDpc(PRKDPC dpc, PKDEFERRED_ROUTINE DeferredRoutine, PVOID DeferredContext) {
+    dpc->Info.TargetInfoAsUlong = 0x113ul;
+    dpc->DpcData = 0;
+    dpc->ProcessorHistory = 0;
+    dpc->DeferredRoutine = DeferredRoutine;
+    dpc->DeferredContext = DeferredContext;
+    return 0;
 }
