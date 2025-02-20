@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "5a059cb45b5f2cf9",
+        "id": "3c16246283633643",
         "type": "tabs",
         "children": [
           {
-            "id": "a27644412681b087",
+            "id": "94f117e9a17f0a9e",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "Cyber/Reversing/Practical Reverse Engineering.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Practical Reverse Engineering"
             }
           }
         ]
@@ -49,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#note",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -74,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 252.50260543823242
   },
   "right": {
     "id": "2f792d0946dade53",
@@ -124,7 +128,7 @@
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": false,
+                "useHierarchy": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
@@ -138,12 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "followCursor": true,
+                "file": "Cyber/Reversing/Practical Reverse Engineering.md",
+                "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Practical Reverse Engineering"
             }
           },
           {
@@ -155,23 +160,13 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
-          },
-          {
-            "id": "c683fbb187411956",
-            "type": "leaf",
-            "state": {
-              "type": "side-panel-control-view",
-              "state": {},
-              "icon": "viewIcon",
-              "title": "Markdown-Autocomplete"
-            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -186,22 +181,19 @@
       "vscode-editor:Create Code File": false
     }
   },
-  "active": "a27644412681b087",
+  "active": "94f117e9a17f0a9e",
   "lastOpenFiles": [
     "Cyber/Reversing/ReversedWindowsFunctions/KeInitializeDpc.c",
+    "OpenShift & Kubrenets.md",
+    "Images/Pasted image 20250218191339.png",
+    "Untitled.md",
+    "Cyber/Pwnable.md",
+    "test.py",
+    "Containers.md",
     "Cyber/Reversing/Extra Terms.md",
-    "Cyber/Reversing/Practical Reverse Engineering.md",
-    "Cyber/Reversing/Practical Malware Analysis.md",
-    "Virtualization/VMware Fundamentals.md",
-    "Pasted image 20250114095332.png.md",
     "Cyber/Reversing/AssemblyFunctions/simple_linux.s",
     "Cyber/Reversing/AssemblyFunctions/simple.c",
-    "Deferred Procedure Call.md",
     "Cyber/Reversing/ReversedWindowsFunctions",
-    "Cyber/Reversing/AssemblyFunctions",
-    "Cyber/Reversing/Code/simple_linux.s",
-    "Cyber/Reversing/Code/simple.c",
-    "Cyber/Pwnable.md",
-    "Containers.md"
+    "Cyber/Reversing/AssemblyFunctions"
   ]
 }

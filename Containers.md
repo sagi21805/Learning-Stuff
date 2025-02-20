@@ -213,10 +213,6 @@ Six most important things that can be configured on a container.
 ## Set Memory and CPU limit
 ## Use the host network namespace
 
-# Container Registries 
-Sharing container images is useful. because it has the code with all of it's dependencies, so it is very easy to run. 
-- A registry is a server that serves images, each image has it's own unique ID which is a hash of the content, and a tag like 18.4 or latest. Some of the registries are private and some or public. 
-
 # Virtual Machines VS Containers
 
 | .              | Container                        | Virtual Machine               |
@@ -356,6 +352,42 @@ FROM alpine:3.19@sha256:13b7e62e8df80264dbb747995705a986aa....
 This makes sure that the same image is used.
 #### Build and Test with CI
 Building and testing the image in CI makes sure that the production branch has a working version that is buildable, and can be used by customers. 
-
 ## Open Container Initiative
 This is an open image format that can be used to build container images, this format can be used to build docker images, and create images in other platforms such as buildha, kaniko, podman etc..
+<u>Podman</u> -> Fully docker and OCI compatible container runtime and management (build, run, network, volumes, etc). This container engine is daemonless and support rootless containers.   
+<u>Buildah</u> -> This is a container image building tool that is daemonless. Supports rootless image building. This is fully OCI and Docker compatible.
+<u>Docker</u> -> Full container management (run, build, network, volumes, etc), docker requires the docker daemon which runs as root. docker is compliant with OCI but it tied to the docker echosystem.
+<u>Docker CE</u> -> (Community Edition) is a free version of docker, that is less mature and contains updates from the community. Docker EE (Enterprise Edition) is a subscription based docker engine that is more mature and contains more Enterprise oriented features like 
+# Container Networking
+Container networking allows container to communicate with other containers, or with the internet. There are several popular container network models ->
+### <u>None</u>
+The simplest mode of networking is a loop back interface in which the container does not communicate with an external network.
+This container network type ensures that the container gets a network stack, The container don't have external network interface but receives a loop back.   
+### <u>Bridge</u>
+An internal host network that enables communication between containers on the same host
+A Linux bridge provides the internal host communication between containers on the same host. Bridge networking employs IP tables for NAT and port mapping to provide single-host networking and its the default docker networking type, and has its interface 'docker0'
+basically a switch that 
+### <u>Host</u>
+Allows a container to share its network namespace with the host, enabling high speed networking.
+In this configuration, the container and the host are on the same networking interface, so the communication is shared, this can lead to port conflicts, The container can't configure the networking stack of the host unless in privilege mode
+### <u>Overlays</u>
+Overlay network allows containers on multiple physical hosts to communicate with each other and the see each other on the same LAN, this is like a VPN for containers, containers that are not on the network don't have access to the packets that are sent via this network.
+## Container Registries 
+Sharing container images is useful. because it has the code with all of it's dependencies, so it is very easy to run. 
+- A registry is a server that serves images, each image has it's own unique ID which is a hash of the content, and a tag like 18.4 or latest. Some of the registries are private and some or public. 
+### Image Tagging 
+Full image name has the following components:
+- `[HOST[:PORT_NUMBER]/]PATH`
+Example of image tag -> ```docker tag 0e5574283393 fedora/httpd:version1.0```
+If a version is not specified, latest is set.
+### Docker Login
+This command is used to login into a registry that requires authentication. 
+The credentials are from $HOME/.docker/config.json
+The default store is docker hub.
+### Docker Push
+This command is used to push image to a registry so it can be shared, images are shared in a compressed form.
+### Docker Pull
+Try to pull an image from the registry, if a tag is not specified, the latest tag will be added
+### Local VS Remote Regsitries
+Local registries are inside information of an organization, they are more secured because only people from the organization can add images to it, This can also work in an air-gapped environment, most of the time this requires lower latency. 
+Remote registries are access
