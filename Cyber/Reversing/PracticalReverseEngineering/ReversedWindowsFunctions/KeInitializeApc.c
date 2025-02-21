@@ -6,12 +6,20 @@ typedef char CCHAR;
 typedef enum bool {true, fales} BOOLEAN;
 typedef enum KPROCESSOR_MODE {kernel, user} KPROCESSOR_MODE;
 
+typedef enum _KAPC_ENVIRONMENT {
+    OriginalApcEnvironment,
+    AttachedApcEnvironment,
+    CurrentApcEnvironment,
+    InsertApcEnvironment
+} KAPC_ENVIRONMENT, *PKAPC_ENVIRONMENT;
+
 typedef struct _KTHREAD {
     // info in ida
-} KTHREAD;
+    KAPC_ENVIRONMENT ApcStateIndex;
+} *KTHREAD;
 
 // size=0x58
-typedef struct KAPC { 
+typedef struct _KAPC { 
     // 0x00
     UCHAR Type;
     // 0x01
@@ -43,12 +51,40 @@ typedef struct KAPC {
     //0x52
     BOOLEAN Inserted;
     // 0x53-58 padding because of allingment
-} KAPC;
+} *KAPC;
 
+typedef void* PKKERNEL_ROUTINE;
+typedef void* PKRUNDOWN_ROUTINE;
+typedef void* PKNORMAL_ROUTINE;
+
+// First argument -> rcx
+// Second argument -> rdx
+// Third argument -> r8
+// Forth argumnet -> r9
+// Fifth argument -> rsp+0x28 (8 Bytes address of RIP, 32 Bytes of shadow space Assuming x64)
+// Sixth arguemnt -> rsp+0x30
+// Seventh Argument -> rps+0x38
+// Eighth Argument -> rsp+0x40
 void KeInitializeApc(
     KAPC Apc,
     KTHREAD Thread,
-    KAPC_ENVIRONMENT TargetEnvironment,
+    KAPC_ENVIRONMENT Environment,
+    PKKERNEL_ROUTINE KernelRoutine,
+    PKRUNDOWN_ROUTINE RundownRoutine,
+    PKNORMAL_ROUTINE NormalRoutine,
+    KPROCESSOR_MODE ProcessorMode,
+    PVOID NormalContext
 ) {
+    Apc->Type = 0x12;
+    Apc->Size = 0x58;
+    if (Environment == CurrentApcEnvironment) {
+        Apc->ApcStateIndex = Thread->ApcStateIndex; 
+    } 
+    else {
+        Apc->ApcStateIndex = Environment;
+    }
+    Apc->Reserved[1] = RundownRoutine;
+    Apc->Reserved[2] = NormalRoutine;
+    Apc->Thread = Thread;
 
 }
