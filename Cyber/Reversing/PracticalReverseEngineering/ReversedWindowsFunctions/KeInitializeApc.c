@@ -5,6 +5,7 @@ typedef struct LIST_ENTRY {} LIST_ENTRY;
 typedef char CCHAR;
 typedef enum bool {true, fales} BOOLEAN;
 typedef enum KPROCESSOR_MODE {kernel, user} KPROCESSOR_MODE;
+# define NULL 0
 
 typedef enum _KAPC_ENVIRONMENT {
     OriginalApcEnvironment,
@@ -83,8 +84,18 @@ void KeInitializeApc(
     else {
         Apc->ApcStateIndex = Environment;
     }
+    Apc->Thread = Thread;
     Apc->Reserved[1] = RundownRoutine;
     Apc->Reserved[2] = NormalRoutine;
-    Apc->Thread = Thread;
-
+    Apc->Reserved[0] = KernelRoutine;
+    if (NormalRoutine != NULL) {
+        Apc->ApcMode = ProcessorMode;
+        Apc->NormalContext = NormalContext;
+    }
+    else {
+        Apc->ApcMode = NULL;
+        Apc->NormalContext = NULL;
+    }
+    Apc->SpareByte0 = 0;
+    Apc->Inserted = 0;
 }

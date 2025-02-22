@@ -11,26 +11,15 @@
             "id": "a27644412681b087",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
-            }
-          },
-          {
-            "id": "13fefd15b9b65c9d",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
+              "type": "vscode-editor",
               "state": {
-                "currentVersion": "1.8.7"
+                "file": "Cyber/Reversing/PracticalReverseEngineering/ReversedWindowsFunctions/KeInitializeApc.c"
               },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.8.7"
+              "icon": "lucide-file",
+              "title": "KeInitializeApc"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -199,8 +188,12 @@
       "vscode-editor:Create Code File": false
     }
   },
-  "active": "da46e6287b45d5e7",
+  "active": "a27644412681b087",
   "lastOpenFiles": [
+    "Cyber/Reversing/PracticalReverseEngineering/ReversedWindowsFunctions/KeInitializeDpc.c",
+    "Cyber/Reversing/PracticalReverseEngineering/ReversedWindowsFunctions/KeInitializeApc.c",
+    "Cyber/Pwnable.md",
+    "Cyber/Reversing/Practical Malware Analysis.md",
     "Cyber/Reversing/ReversedWindowsFunctions/KeInitializeApc.c",
     "Cyber/Reversing/ReversedWindowsFunctions/KeInitializeDpc.c",
     "Cyber/Reversing/ReversedWindowsFunctions",
@@ -212,21 +205,13 @@
     "Cyber/Reversing/PracticalReverseEngineering/AssemblyFunctions/simple_linux.s",
     "Cyber/Reversing/PracticalReverseEngineering/AssemblyFunctions/simple.c",
     "Cyber/Reversing/PracticalReverseEngineering/AssemblyFunctions",
-    "Cyber/Reversing/PracticalReverseEngineering/ReversedWindowsFunctions/ntoskrnl.exe.i64",
-    "Cyber/Reversing/PracticalReverseEngineering/ReversedWindowsFunctions/KeInitializeApc.c",
-<<<<<<< Updated upstream
-=======
-    "Cyber/Reversing/PracticalReverseEngineering/ReversedWindowsFunctions/KeInitializeDpc.c",
->>>>>>> Stashed changes
     "Cyber/Reversing/ReversedWindowsFunctions/Practical Reverse Engineering.md",
     "OpenShift & Kubrenets.md",
     "Images/Pasted image 20250218191339.png",
     "Cyber/Reversing/Extra Terms.md",
-    "Cyber/Reversing/Practical Malware Analysis.md",
     "Virtualization/VMware Fundamentals.md",
     "Pasted image 20250114095332.png.md",
     "Deferred Procedure Call.md",
-    "Cyber/Pwnable.md",
     "Containers.md"
   ]
 }
