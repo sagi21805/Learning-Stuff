@@ -1,42 +1,14 @@
 {
   "main": {
-    "id": "ab5c3ded6792a9dd",
+    "id": "e680997ebbbd9bd1",
     "type": "split",
     "children": [
       {
-        "id": "a504d8343c2575af",
+        "id": "7e1a26b29e7f3f0b",
         "type": "tabs",
         "children": [
           {
-            "id": "0dc5884b347ee100",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Cyber/Pwnable.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Pwnable"
-            }
-          },
-          {
-            "id": "05cffd0db2210e99",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Infrastructure/Containerners/Containers.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Containers"
-            }
-          },
-          {
-            "id": "33259f0ad709bd62",
+            "id": "e6fcd2a58a9766ae",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -45,22 +17,21 @@
               "title": "Graph view"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "f75a00249b513442",
+    "id": "d3dea8cfa6109efd",
     "type": "split",
     "children": [
       {
-        "id": "98f79c5eb771a2b3",
+        "id": "c12ceb99b2a870e3",
         "type": "tabs",
         "children": [
           {
-            "id": "47661e25c098f85c",
+            "id": "da46e6287b45d5e7",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -73,12 +44,12 @@
             }
           },
           {
-            "id": "8a078eed38254fce",
+            "id": "1792b36711397843",
             "type": "leaf",
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#note",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -90,7 +61,7 @@
             }
           },
           {
-            "id": "0bd99da44d58baea",
+            "id": "bf8bd26ad465c808",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -103,22 +74,23 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 476.5026054382324
   },
   "right": {
-    "id": "66efe37b967d5b84",
+    "id": "2f792d0946dade53",
     "type": "split",
     "children": [
       {
-        "id": "f0f35472803c7cc7",
+        "id": "a7d266d20a70ff5f",
         "type": "tabs",
         "children": [
           {
-            "id": "bbf1fb5332709526",
+            "id": "166d1c126f2f7385",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Containers.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -128,30 +100,31 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for Containers"
             }
           },
           {
-            "id": "57236fcf42c55e43",
+            "id": "f8f71187c6426aa0",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Containers.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links"
+              "title": "Outgoing links from Containers"
             }
           },
           {
-            "id": "3f8154dce5d0295c",
+            "id": "f7764e10e5edb7b4",
             "type": "leaf",
             "state": {
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true,
+                "useHierarchy": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
@@ -160,12 +133,12 @@
             }
           },
           {
-            "id": "4ebdd0c87cdf898a",
+            "id": "022d68e2d18bc238",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "followCursor": false,
+                "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
@@ -174,17 +147,7 @@
             }
           },
           {
-            "id": "bc9c989156d75233",
-            "type": "leaf",
-            "state": {
-              "type": "side-panel-control-view",
-              "state": {},
-              "icon": "viewIcon",
-              "title": "Markdown-Autocomplete"
-            }
-          },
-          {
-            "id": "9b90659256bee6bd",
+            "id": "99c63951363c611a",
             "type": "leaf",
             "state": {
               "type": "git-view",
@@ -192,13 +155,23 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
+          },
+          {
+            "id": "c683fbb187411956",
+            "type": "leaf",
+            "state": {
+              "type": "side-panel-control-view",
+              "state": {},
+              "icon": "viewIcon",
+              "title": "Markdown-Autocomplete"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 345.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -213,18 +186,43 @@
       "vscode-editor:Create Code File": false
     }
   },
-  "active": "33259f0ad709bd62",
+  "active": "99c63951363c611a",
   "lastOpenFiles": [
+    "Computers/From Transistors to A Computer.md",
+    "Exercises/Pwnable/Toddler's Bottle/1. File Descriptors.md",
+    "Exercises/Practical Reverse Engineering/Chapter 1/Questions.md",
+    "Exercises/Practical Reverse Engineering/Exercises.md",
+    "Exercises/Practical Reverse Engineering/Chapter 1/Chapter 1. WalkThrough.md",
+    "Exercises/Practical Reverse Engineering/Chapter 1/Reverse Windows Functions/KeInitializeApc.c",
+    "Exercises/Practical Reverse Engineering/Chapter 1/Write Assembly Functions/simple.c",
+    "Exercises/Practical Reverse Engineering/Chapter 1/Write Assembly Functions/simple_linux.s",
+    "Exercises/Practical Reverse Engineering/Chapter 1",
+    "Computers/Assembly.md",
+    "Computers/Practical Malware Analysis.md",
+    "Computers/Reversing/PracticalReverseEngineering/Practical Reverse Engineering.md",
+    "Books/Practical Reverse Engineering.pdf",
+    "Computers/System Mechanisms.md",
+    "Computers/Windows Kernel.md",
+    "Exercises/Pwnable/Toddler's Bottle/5. Break Passcode.md",
+    "Exercises/Practical Reverse Engineering/Chapter 1/Reverse Windows Functions/KeInitializeDpc.c",
+    "Computers/Reversing/AssemblyFunctions/simple_linux.s",
+    "Computers/Reversing/AssemblyFunctions/simple.c",
+    "Exercises/Practical Reverse Engineering/Chapter 1/Reverse Windows Functions",
+    "Exercises/Practical Reverse Engineering/Chapter 1/Write Assembly Functions",
+    "Exercises/Pwnable/Toddler's Bottle/4. Reversing Flag Obfuscated Program.md",
+    "Exercises/Pwnable.md",
+    "Exercises/Pwnable/Toddler's Bottle/3. Buffer Over Flow.md",
+    "Exercises/Pwnable/Toddler's Bottle/2. Hash Collision.md",
+    "Infrastructure/Virtualization/VxRail Concepts.md",
+    "Infrastructure/Virtualization/vSAN Planning and Deployment.md",
+    "Infrastructure/Virtualization/VMware Fundamentals.md",
+    "Infrastructure/Storage/Isilon Concepts.md",
+    "Infrastructure/Storage/Extra Stuff.md",
+    "Infrastructure/Storage/ECS Concepts.md",
     "Infrastructure/Containerners/OpenShift & Kubrenets.md",
     "Infrastructure/Containerners/Containers.md",
-    "Infrastructure/Containerners",
-    "Cyber/Pwnable.md",
-    "Infrastructure",
-    "Untitled",
-    "Cyber/Reversing/Practical Malware Analysis.md",
-    "Cyber/Reversing/AssemblyFunctions/simple.c",
-    "a.out",
-    "passcode.c",
-    "Cyber/Reversing/PracticalReverseEngineering/ReversedWindowsFunctions/ObFastDereferenceObject.c"
+    "Cyber/Reversing/Practical Reverse Engineering.md",
+    "Cyber/Reversing/ReversedWindowsFunctions/Practical Reverse Engineering.md",
+    "Images/Pasted image 20250218191339.png"
   ]
 }
