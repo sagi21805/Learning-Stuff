@@ -37,4 +37,17 @@ Quotas cannot protect against all kinds of resource sharing, such as network tra
 ## Data Plain Isolation
 Data isolation ensures that pods and workloads for different tenants are sufficiently isolated
 ### Network Isolation
-https://kubernetes.io/docs/concepts/security/multi-tenancy/
+By default, all pods in kubernetes cluster are allowed to communicate with each other, and all traffic in unencrypted. This can lead into a security vulnerability, where traffic in sent maliciously to an unintended destination.
+Pod to Pod communication can be controlled using <u>Network Policy</u> which restrict communication between pods using namespace labels or IP address range. 
+### Storage Isolation
+Kubernetes offers types of volumes that can be used as persistent storage. For security and data isolation, dynamic volume provisioning is recommended and volume types that use node resources should be avoided. 
+<u>Storage Classes</u> allow you to describe custom "classes" of storage, offered by the cluster. which can provide Quality of Service levels, Backup policies, or custom policies. 
+Pods can request storage using a Persistent Volume Claim, which is a namespaced resource, which enables isolating portions of storage systems and dedicating it to tenants withing the shared Kubernetes 
+### Sandboxing Containers 
+`This is an OpenSource project which is not the core of kubernetes`
+Kubernetes pods are composed of one or more containers that execute on worker nodes. Containers utilize OS-level virtualization and hence offer a weaker isolation boundary then a virtual machine.
+In a shared environment, unpatched vulnerabilities in the application and system layers can be exploited by attackers for container breakouts and remote code execution. 
+<u>Sandboxing</u> provides a way to isolate workloads running in a shared cluster. It typically involves running each pod in a separate execution environment such as a virtual machine or a user-space kernel. Sandboxing is often recommended, when running untrusted code where workloads are assumed to be malicious. Part of the reason this type of isolation in necessary is because containers processes running on a shared kernel mount file-systems in `/sys` and `/proc` from the underlying host. 
+### Node Isolation
+Node isolation is another technique that you can use to isolate tenant workloads from each other. With node isolation, a set of nodes, a set of nodes is dedicated to running pods from a particular tenant and co-mingling of tenant pods is prohibited. This configuration reduces the noisy tenant phenomenon. This also secures from container escapes, because of a hacker escapes from a container of other tenants he is on a different node so he can't access your resources.
+Although the nodes are different, the control plane of the cluster is the same, so services like kubelet and the API are still shared (unless using virtual control plane) so a skilled attacker can you the permissions assigned to the kubelet or other pods to move his container to the victim node and then escape from it to gain access to the node. 

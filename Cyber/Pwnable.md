@@ -1,4 +1,4 @@
-# Toddler's Bottle
+ # Toddler's Bottle
 ## File Descriptor (fd challenge)
 The given code was reading from a file descriptor, which is a process unique identifier for a file, which it can read or write from. Every process in Linux has 3 default file descriptors: 
 0. stdin -> standard input
@@ -64,3 +64,4 @@ This command write 52 time the letter 'a' which overflows the buffer until the k
 - Understand how to see more strings in IDA 
 - Understand when program is obfuscated (not seeing any strings)
 - Understand how to remotely debug IDA program from other 
+- 
