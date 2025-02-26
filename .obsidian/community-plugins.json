@@ -2,7 +2,8 @@
   "obsidian-underline",
   "obsidian-git",
   "slash-commander",
-  "obsidian-markdown-formatting-assistant-plugin",
   "vscode-editor",
-  "obsidian-excalidraw-plugin"
+  "obsidian-excalidraw-plugin",
+  "code-styler",
+  "editor-width-slider"
 ]

@@ -13,10 +13,10 @@ Each logic gate can be described both by a sequence of transistors but also with
 ![[2. NOT Gate|center]]
 This is an inverter gate (A One is a Zero and a Zero is a One) and can be described with the following table
 
-| X   | NOT X |
-| --- | ----- |
-| 0   | 1     |
-| 1   | 0     |
+| X   | NOT X |     |
+| --- | ----- | --- |
+| 0   | 1     |     |
+| 1   | 0     |     |
 
 ## AND Gate
 ![[3. AND Gate|center]]

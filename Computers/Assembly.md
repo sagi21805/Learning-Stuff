@@ -34,6 +34,7 @@ The x86 instruction set allows a high level of flexibility in terms of data move
 3. Immediate to memory
 4. Register to to memory and vice versa
 5. Memory to memory.
+
 The first 4 methods are supported by all modern architectures, but the last on is specific to x86. 
 A classical RISC (Reduced Instruction Set Computer) architecture like ARM can _only_ read/write data from/to memory with load/store instructions (_LDR_ and _STR_, respectively); 
 For example a simple operation like incrementing a value in memory requires three instructions:
@@ -41,6 +42,7 @@ For example a simple operation like incrementing a value in memory requires thre
 2. Add one to the register (_ADD_)
 3. Write the register to memory (_STR_)
 On x86 this procedure would require only one instruction _INC_ or _ADD_ which can access the memory directly. The _MOVS_ instruction can read and write to memory at the same time.
+
 <u>Arm Assembly</u>
 ```arm-asm
 LDR  R3, [R3]       
@@ -127,13 +129,16 @@ mov eax, [ebp]
 ; Read value from memory address EBP and store it to EAX
 
 and dword ptr [ecx+1Ch], 0 
-; And gates address at ecx+0x1C (Offset to DpcData) with 0 (Effictive set DcpData to 0)
+; And gates address at ecx+0x1C (Offset to DpcData) with 0 
+; (Effictive set DcpData to 0)
 
 mov [ecx+0Ch], eax
 ; Move value at EAX to address ECX+0x0C (offset to DeferredRoutine)
 
 mov dword ptr [ecx], 113h
-; Move value 0x113 to the ecx address, and enforce it to be a 32-bit address (Because 0x113 is a 16-bit value the address will try to only change the first 16 bits but we want to change a 32bit address so we add dword ptr)  
+; Move value 0x113 to the ecx address, and enforce it to be a 32-bit address 
+; (Because 0x113 is a 16-bit value the address will try to only change the first
+; 16 bits but we want to change a 32bit address so we add dword ptr)  
 
 mov [ecx+10h], eax
 ; Change the value at ECX+0x10 (Which is DefferedContext) to the value at EAX
@@ -193,7 +198,7 @@ loc_7F627F:
 	; if the reuslt is negative jump to loop_start  
 ```
 
-```Pseudo code
+```clike
 loop_start {
 	eax = *(edi + 4);
 	eax = *(eax + ebx * 4);
@@ -474,12 +479,14 @@ For example:
 mov eax, 3 
 mov ecx, 22222222h
 mul ecx
-; EDX:EAX = 3 * 0x22222222 = 0x6666666 (no overflow) EDX = 0, EAX = 0x66666666
+; EDX:EAX = 3 * 0x22222222 = 0x6666666 (no overflow) EDX = 0,
+; EAX = 0x66666666
 
 mov eax, 3
 mov ecx, 80000000h
 mul ecx 
-; EDX:EAX = 3 * 0x80000000 = 0x180000000 (overflow) EAX = 1, EAX = 0x800000000
+; EDX:EAX = 3 * 0x80000000 = 0x180000000 (overflow) EAX = 1,
+; EAX = 0x800000000
 ```
 <u>IMUL Instruction</u>
 Very similar to MUL
@@ -916,7 +923,7 @@ loop_start:
 printf("Done");
 ```
 When complied, these are looking the same on the machine-code level.
-```nasm
+```nasm wrap
 mov edi, ds:__imp_printf
 ; put the address of the printf function in edi
 

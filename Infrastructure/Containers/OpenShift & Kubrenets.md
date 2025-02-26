@@ -176,3 +176,7 @@ You need a working container runtime on each node in the cluster, so that the ku
 This is the main protocol of communication between the runtime and the kubelet
 ## Container Storage Interface (CSI)
 This is a container storage interface, prior to CSI kubernetes provided a powerful volume plugin system, it was challenging to add support for new volume plugins to kubernetes: Volume plugins were "in-tree" meaning their code was part of the core kubernetes code and shipped with the core binaries. CSI was developed as a standard for exposing arbitrary block and file storage storage systems.
+
+# CRI-O
+This is a container runtime interface that is designed specifically for kubernetes. This container runtime is lightweight and support the Open Container Initiative. 
+This container runtime aims to switch docker in kubernetes environment where a more lightweight container runtime is needed.

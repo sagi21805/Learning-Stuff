@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "1124f044d6473028",
+        "id": "e387e4c0fc0b1532",
         "type": "tabs",
         "children": [
           {
-            "id": "b0001d5e389945bd",
+            "id": "5e73868edefbd901",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "Infrastructure/Containers/OpenShift & Kubrenets.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "OpenShift & Kubrenets"
             }
           }
         ]
@@ -74,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 235.50260543823242
+    "width": 282.5026054382324
   },
   "right": {
     "id": "66efe37b967d5b84",
@@ -136,22 +140,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "Infrastructure/Containers/OpenShift & Kubrenets.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
-            }
-          },
-          {
-            "id": "bc9c989156d75233",
-            "type": "leaf",
-            "state": {
-              "type": "side-panel-control-view",
-              "state": {},
-              "icon": "viewIcon",
-              "title": "Markdown-Autocomplete"
+              "title": "Outline of OpenShift & Kubrenets"
             }
           },
           {
@@ -165,11 +160,11 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 373.5
+    "width": 236.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -185,39 +180,46 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "9b90659256bee6bd",
+  "active": "5e73868edefbd901",
   "lastOpenFiles": [
-    "Infrastructure/Containers/OpenShift & Kubrenets.md",
     "Computers/From Transistors to A Computer.md",
-    "Computers/Practical Malware Analysis.md",
-    "tmp.cpp",
+    "Computers/Assembly.md",
+    "Computers/Windows Kernel.md",
+    "Computers/System Mechanisms.md",
+    "Infrastructure/General/ISM.pdf",
+    "Images/Pasted image 20241216144309.png",
+    "Images/Pasted image 20241215140544.png",
+    "Exercises/Pwnable/Toddler's Bottle/5. Break Passcode.md",
+    "Exercises/Pwnable/Toddler's Bottle/4. Reversing Flag Obfuscated Program.md",
+    "Exercises/Pwnable/Toddler's Bottle/3. Buffer Over Flow.md",
+    "Exercises/Pwnable/Toddler's Bottle/2. Hash Collision.md",
+    "Exercises/Pwnable/Toddler's Bottle/1. File Descriptors.md",
     "Computers/Logic Gates Drawing/5. XOR Gate.md",
+    "Infrastructure/Containers/OpenShift & Kubrenets.md",
+    "Computers/Practical Malware Analysis.md",
+    "Infrastructure/Containers/Containers.md",
+    "Images/Pasted image 20250107202413.png",
+    "Excalidraw/Drawing 2025-02-26 15.58.57.excalidraw.md",
+    "Excalidraw",
+    "2025-02-26.md",
+    "Untitled.canvas",
+    "Untitled 1.canvas",
+    "Books/Practical Reverse Engineering.pdf",
+    "tmp.cpp",
     "Computers/Logic Gates Drawing/4. OR Gate.md",
     "tmp.c",
     "Computers/Logic Gates Drawing/3. AND Gate.md",
     "Computers/Logic Gates Drawing/2. NOT Gate.md",
     "Computers/Logic Gates Drawing/1. Transistor.md",
-    "Computers/Assembly.md",
-    "Computers/Windows Kernel.md",
-    "Computers/System Mechanisms.md",
     "Untitled.md",
-    "Exercises/Pwnable/Toddler's Bottle/2. Hash Collision.md",
-    "Exercises/Pwnable/Toddler's Bottle/1. File Descriptors.md",
     "Computers/Circuit Drawing/Untitled.md",
-    "Excalidraw",
     "Computers/Circuit Drawing/Untitled.canvas",
     "Computers/Logic Gates Drawing",
     "Images/Pasted image 20250224131156.png",
-    "Infrastructure/Containers/Containers.md",
     "Exercises/Practical Reverse Engineering/Chapter 1/Write Assembly Functions/simple_linux.s",
     "Exercises/Practical Reverse Engineering/Chapter 1/Write Assembly Functions/simple.c",
     "Exercises/Practical Reverse Engineering/Chapter 1/Reverse Windows Functions/ObFastDereferenceObject.c",
     "Exercises/Practical Reverse Engineering/Chapter 1/Reverse Windows Functions/KeInitializeDpc.c",
-    "Exercises/Practical Reverse Engineering/Chapter 1/Reverse Windows Functions/KeInitializeApc.c",
-    "Exercises/Pwnable/Toddler's Bottle/5. Break Passcode.md",
-    "Exercises/Pwnable/Toddler's Bottle/4. Reversing Flag Obfuscated Program.md",
-    "Exercises/Pwnable/Toddler's Bottle/3. Buffer Over Flow.md",
-    "Exercises/Practical Reverse Engineering/Chapter 1/Write Assembly Functions",
     "Exercises/Practical Reverse Engineering/Chapter 1/Questions.md",
     "Exercises/Practical Reverse Engineering/Chapter 1/Chapter 1. WalkThrough.md",
     "Cyber/Pwnable.md",
