@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "e387e4c0fc0b1532",
+        "id": "b1f42788e0014bbb",
         "type": "tabs",
         "children": [
           {
-            "id": "5e73868edefbd901",
+            "id": "7e4c367d9fa6f18c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Infrastructure/Containers/OpenShift & Kubrenets.md",
+                "file": "Computers/Writing Rust OS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "OpenShift & Kubrenets"
+              "title": "Writing Rust OS"
             }
           }
         ]
@@ -140,13 +140,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Infrastructure/Containers/OpenShift & Kubrenets.md",
+                "file": "Computers/Writing Rust OS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of OpenShift & Kubrenets"
+              "title": "Outline of Writing Rust OS"
             }
           },
           {
@@ -175,28 +175,39 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "obsidian-git:Open Git source control": false,
-      "obsidian-markdown-formatting-assistant-plugin:Open Markdown Formatting Assistant": false,
       "vscode-editor:Create Code File": false,
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "5e73868edefbd901",
+  "active": "7e4c367d9fa6f18c",
   "lastOpenFiles": [
-    "Computers/From Transistors to A Computer.md",
-    "Computers/Assembly.md",
-    "Computers/Windows Kernel.md",
     "Computers/System Mechanisms.md",
+    "Computers/Windows Kernel.md",
+    "Computers/Writing Rust OS.md",
+    "Computers/Assembly.md",
+    "Exercises/Pwnable/Toddler's Bottle/7. Input.md",
+    "exploit.c",
+    "RustOS.md",
+    "Infrastructure/Containers/OpenShift & Kubrenets.md",
+    "Computers/Practical Malware Analysis.md",
+    "test.c",
+    "\n",
+    "txt",
+    "input",
+    "a.out",
+    "test.py",
+    "Exercises/Pwnable/Toddler's Bottle/6. Random.md",
+    "Exercises/Pwnable/Toddler's Bottle/5. Break Passcode.md",
+    "Exercises/Pwnable/Toddler's Bottle/Random.md",
+    "Exercises/Pwnable/Toddler's Bottle/3. Buffer Over Flow.md",
+    "Exercises/Pwnable/Toddler's Bottle/2. Hash Collision.md",
+    "Exercises/Pwnable/Toddler's Bottle/4. Reversing Flag Obfuscated Program.md",
+    "Computers/From Transistors to A Computer.md",
     "Infrastructure/General/ISM.pdf",
     "Images/Pasted image 20241216144309.png",
     "Images/Pasted image 20241215140544.png",
-    "Exercises/Pwnable/Toddler's Bottle/5. Break Passcode.md",
-    "Exercises/Pwnable/Toddler's Bottle/4. Reversing Flag Obfuscated Program.md",
-    "Exercises/Pwnable/Toddler's Bottle/3. Buffer Over Flow.md",
-    "Exercises/Pwnable/Toddler's Bottle/2. Hash Collision.md",
     "Exercises/Pwnable/Toddler's Bottle/1. File Descriptors.md",
     "Computers/Logic Gates Drawing/5. XOR Gate.md",
-    "Infrastructure/Containers/OpenShift & Kubrenets.md",
-    "Computers/Practical Malware Analysis.md",
     "Infrastructure/Containers/Containers.md",
     "Images/Pasted image 20250107202413.png",
     "Excalidraw/Drawing 2025-02-26 15.58.57.excalidraw.md",
@@ -205,24 +216,12 @@
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Books/Practical Reverse Engineering.pdf",
-    "tmp.cpp",
     "Computers/Logic Gates Drawing/4. OR Gate.md",
-    "tmp.c",
     "Computers/Logic Gates Drawing/3. AND Gate.md",
     "Computers/Logic Gates Drawing/2. NOT Gate.md",
     "Computers/Logic Gates Drawing/1. Transistor.md",
-    "Untitled.md",
     "Computers/Circuit Drawing/Untitled.md",
     "Computers/Circuit Drawing/Untitled.canvas",
-    "Computers/Logic Gates Drawing",
-    "Images/Pasted image 20250224131156.png",
-    "Exercises/Practical Reverse Engineering/Chapter 1/Write Assembly Functions/simple_linux.s",
-    "Exercises/Practical Reverse Engineering/Chapter 1/Write Assembly Functions/simple.c",
-    "Exercises/Practical Reverse Engineering/Chapter 1/Reverse Windows Functions/ObFastDereferenceObject.c",
-    "Exercises/Practical Reverse Engineering/Chapter 1/Reverse Windows Functions/KeInitializeDpc.c",
-    "Exercises/Practical Reverse Engineering/Chapter 1/Questions.md",
-    "Exercises/Practical Reverse Engineering/Chapter 1/Chapter 1. WalkThrough.md",
-    "Cyber/Pwnable.md",
-    "Cyber/Reversing/Practical Malware Analysis.md"
+    "Images/Pasted image 20250224131156.png"
   ]
 }

@@ -23,6 +23,11 @@ In kubernetes a <u>Namespace</u> provides mechanism for isolation groups of API 
 2. Many kubernetes security policies are scoped to namespaces, like RBAC Control, Network Policies
 In multi-tenant environment, a Namespace helps to segment a tenant's workload into a logical and distinct management unit.
 It is common to segment each workload in a different namespace even if they all tied to the same customer.
+#### Openshift Projects
+Openshift projects are namespaces with additional features like ->
+- <u>Access Control Intergration</u> -> Openshift project integrates tightly with openshift authentication and authorization systems, providing easier management of user roles and access policies
+-  <u>Resource Management</u> -> Openshift provides a simpler interface for managing project-specific resources, like templates, quotas and more.
+- <u>Namespace Isolation</u> -> While kubernetes namespaces allow resource isolation, Openshift projects provide better tools for isolating environments, often with higher-level abstraction like user and group permissions.
 #### Access Control
 The most important type of isolation is control plane authorization, If other teams could access and change other teams API resources, there is practically no isolation. 
 Role Based Access Control (RBAC) is commonly used to enforce kubernetes control plane, for both users and workloads (service accounts) <u>Roles and RoleBindings</u> are kubernetes objects that are used at the namespace level to enforce access control. 
@@ -180,3 +185,79 @@ This is a container storage interface, prior to CSI kubernetes provided a powerf
 # CRI-O
 This is a container runtime interface that is designed specifically for kubernetes. This container runtime is lightweight and support the Open Container Initiative. 
 This container runtime aims to switch docker in kubernetes environment where a more lightweight container runtime is needed.
+
+| .                | CRI-O                                                       | Docker                                         |
+| ---------------- | ----------------------------------------------------------- | ---------------------------------------------- |
+| Purpose          | Kubernetes Native Container Runtime                         | General purpose Container Runtime              |
+| K8s Intergration | Built-in CRI support                                        | Requires `dockershim` or `cridockerd`          |
+| Architecture     | Lightweight, no background daemon                           | Monolithic, runs a background daemon (dockerd) |
+| Runtime          | Uses OCI runtimes like `runc`, `crun`, or `kata Containers` | Uses `containerd` (which also runs `runc`)     |
+| Security         | Smaller attack surface, built-in SELinux, seccomp, apparmor | Larger attack surface, dockerd runs as root    |
+| Networking       | Relies on CNI for networking                                | Built-in networking with `docker0` bridge      |
+| Use Case         | Best for kubernetes cluster                                 | Best for development and standalone containers |
+# Artifacts
+This is all the by products that are generated from a project that are not the literal code, for example tested executables, documents, libraries, images, configuration files, etc.
+They serve reproducible, versioned components that enable ->
+- <u>Deployment Consistency</u> -> Ensuring the same tested and verified build is used across development, staging and production environment.
+- <u>Faster Development and Deployment</u> -> Avoiding redundant builds and making precompiled components readily available. 
+- <u>Reproducibility and Rollbacks</u> -> Allowing teams to track versions and quickly revert to a known stable state.
+## Secure Artifacts 
+- Use of software repositories like nexus.
+- Store artifacts in an encrypted format.
+## Common Versioning
+`MAJOR.MINOR.PATCH (e.g. 1.2.3)`
+- <u>Major</u> -> Breaking changes to the product, doesn't have backwards compatibility to the last major version
+- <u>Minor</u> -> Added features to the product, reserves backwards compatibility
+- <u>Patch</u> -> Small bug fixes
+# Pods
+_Pods are the smallest deployable units of computing that you can create and manage in kubernetes._
+_A Pods_ (as in pod of whales or pea pod) is a group of one or more containers with a shared network and storage resources, and a specification for how to run the containers. 
+A Pods models application-specific "logical host": it container one or more application containers which are relatively tightly coupled.
+A Pod is similar to a set of containers with shared namespaces and shared filesystems volumes.
+Pods in kubernetes cluster are used in two main ways ->
+- <u>Pods that run single container</u> -> The "One container per Pod" model is the most common kubernetes use case; in this case a pod is a wrap around a container and kubernetes manages the pods instead of directly the container 
+- <u>Pods that run multiple containers</u> -> A Pod can encapsulate an application composed of multiple composed of multiple co-located containers that are tightly coupled and need to share resources these co-located containers form a single cohesive unit of service, for example 
+Pods are a wrapper to a container, a container has all the dependencies and configurations, but the pods provides the actual resources from the host node, like cpu, storage volumes etc.
+## Pods Lifetime
+Whilst a pod is running, the kubelet is able to restart containers to handle some kinds of faults.
+Withing a pod, kubernetes tracks different container stats and determines actions to take to make a pod healthy again. 
+In kubernetes, Pods have both a specification and an actual status. The status for a pod object consists of a set of <u>Pod Conditions</u> which consists ->
+
+| Value     | Description                                                                                                                                                                                                                                       |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pending   | The Pod has been accepted by the Kubernetes cluster, but one or more of the containers has not been set up and made ready to run. This includes time a Pod spends waiting to be scheduled as well as the time spent downloading container images. |
+| Running   | The pod has been bound to a node, and all the containers have been created. At least one container is still running, or in the process of starting or restarting.                                                                                 |
+| Succeeded | All containers in the Pod terminated in success, and will not be restarted.                                                                                                                                                                       |
+| Failed    | All containers in the pod have terminated, and at least one container has terminated in failure. That is the container exited in a non zero status or was terminated by the system, and is not set for automatic restarting.                      |
+| Unknown   | For some reason the state of the Pod could not be obtained. This phase typically occurs due to an error in communicating with the node where the Pod should be running.                                                                           |
+_Container States can be -> Waiting, Running, Terminated_
+## Resource Limits 
+The containers inside the pod can be limited, the request limit is a soft limit of how much CPU the container needs, and the limit limit is a hard limit that if the container surpasses it, it may be terminated the os. for example ->
+```json
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-container-pod
+spec:
+  containers:
+    - name: container1
+      image: nginx
+      resources:
+        requests: // How much resources the container asks for
+          memory: "64Mi"
+          cpu: "250m"
+        limits: // The max amont that can be given to the container
+          memory: "128Mi"
+          cpu: "500m"
+    - name: container2
+      image: busybox
+      resources:
+        requests:
+          memory: "32Mi"
+          cpu: "100m"
+        limits:
+          memory: "64Mi"
+          cpu: "200m"
+
+```
+
