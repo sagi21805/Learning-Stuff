@@ -164,7 +164,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 236.5
+    "width": 324.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -181,15 +181,17 @@
   },
   "active": "7e4c367d9fa6f18c",
   "lastOpenFiles": [
+    "Infrastructure/Containers/OpenShift & Kubrenets.md",
+    "Pasted image 20250310150801.png",
     "Computers/System Mechanisms.md",
+    "Computers/From Transistors to A Computer.md",
+    "Computers/Practical Malware Analysis.md",
     "Computers/Windows Kernel.md",
     "Computers/Writing Rust OS.md",
     "Computers/Assembly.md",
     "Exercises/Pwnable/Toddler's Bottle/7. Input.md",
     "exploit.c",
     "RustOS.md",
-    "Infrastructure/Containers/OpenShift & Kubrenets.md",
-    "Computers/Practical Malware Analysis.md",
     "test.c",
     "\n",
     "txt",
@@ -202,7 +204,6 @@
     "Exercises/Pwnable/Toddler's Bottle/3. Buffer Over Flow.md",
     "Exercises/Pwnable/Toddler's Bottle/2. Hash Collision.md",
     "Exercises/Pwnable/Toddler's Bottle/4. Reversing Flag Obfuscated Program.md",
-    "Computers/From Transistors to A Computer.md",
     "Infrastructure/General/ISM.pdf",
     "Images/Pasted image 20241216144309.png",
     "Images/Pasted image 20241215140544.png",

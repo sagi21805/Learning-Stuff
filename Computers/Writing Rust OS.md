@@ -239,3 +239,4 @@ There is also a way with BIOS int 0x15 to do so, but will be covered here as the
 
 
 
+https://dev.to/frosnerd/writing-my-own-boot-loader-3mld

@@ -23,10 +23,18 @@ In kubernetes a <u>Namespace</u> provides mechanism for isolation groups of API 
 2. Many kubernetes security policies are scoped to namespaces, like RBAC Control, Network Policies
 In multi-tenant environment, a Namespace helps to segment a tenant's workload into a logical and distinct management unit.
 It is common to segment each workload in a different namespace even if they all tied to the same customer.
+#### Limit Ranges
+By default, containers run with unbounded resource limit, using [[#Resource Quotas]], we can limit the amount of resources that a certain namespace has from the total resources in the cluster, within a namespace, a pod may claim as much CPU and memory as is allowed by the Resource Quotas that apply to the namespace. 
+Limit ranges is a policy to constrain the resource allocation that can be specified for every object kind (such as pod, or PersistantVolumeClaim) in a namespace.
+For example a limit range can ->
+- Enforce _Minimum_ or _Maximum_ compute resources per pod, or container namespace.
+- Enforce the number of storage requests per PersistantVolumeClaim
+- Set default request and limit for an object in the namespace.
+
 #### Openshift Projects
 Openshift projects are namespaces with additional features like ->
 - <u>Access Control Intergration</u> -> Openshift project integrates tightly with openshift authentication and authorization systems, providing easier management of user roles and access policies
--  <u>Resource Management</u> -> Openshift provides a simpler interface for managing project-specific resources, like templates, quotas and more.
+- <u>Resource Management</u> -> Openshift provides a simpler interface for managing project-specific resources, like templates, quotas and more.
 - <u>Namespace Isolation</u> -> While kubernetes namespaces allow resource isolation, Openshift projects provide better tools for isolating environments, often with higher-level abstraction like user and group permissions.
 #### Access Control
 The most important type of isolation is control plane authorization, If other teams could access and change other teams API resources, there is practically no isolation. 
@@ -218,7 +226,8 @@ Pods in kubernetes cluster are used in two main ways ->
 - <u>Pods that run single container</u> -> The "One container per Pod" model is the most common kubernetes use case; in this case a pod is a wrap around a container and kubernetes manages the pods instead of directly the container 
 - <u>Pods that run multiple containers</u> -> A Pod can encapsulate an application composed of multiple composed of multiple co-located containers that are tightly coupled and need to share resources these co-located containers form a single cohesive unit of service, for example 
 Pods are a wrapper to a container, a container has all the dependencies and configurations, but the pods provides the actual resources from the host node, like cpu, storage volumes etc.
-## Pods Lifetime
+Also, to manage a container, kubernetes needs more information, such as restart policy which defines what to do when the container terminates, or live probe which defines an action to detect if a process in a container is still alive from the application perspective, for example if a web server responds to an HTTP request.  
+## Pods Life-Cycle
 Whilst a pod is running, the kubelet is able to restart containers to handle some kinds of faults.
 Withing a pod, kubernetes tracks different container stats and determines actions to take to make a pod healthy again. 
 In kubernetes, Pods have both a specification and an actual status. The status for a pod object consists of a set of <u>Pod Conditions</u> which consists ->
@@ -260,4 +269,35 @@ spec:
           cpu: "200m"
 
 ```
+## Using Multi-Container Pods
+
+Also, to manage a container, kubernetes needs more information, such as restart policy which defines what to do when the container terminates, or live probe which defines an action to detect if a process in a container is still alive from the application perspective, for example if a web server responds to an HTTP request.  
+<u>Side Cat Containers</u> -> "Help" the main container. For example, logger or data changes watcher. A log watcher for example, can be built once by a different team and reused across different applications. Another example is a file or data loader that generates data for the main container.
+<u>Proxies, Bridges, Adapters</u> -> connect the main with the external 
+
+## Workloads
+_Understand pod, the smallest deployable compute object in Kubernetes, and the higher-level abstraction that help you run them_
+A workload is simply an application running in kubernetes. Whether the workload is a single component or several that work together, on Kubernetes you run it on a set of [[#Pods]].
+K8s pods have a defined [[#Pods Life-Cycle]]. For example, once a pod is running in the cluster, and a critical error has occurred on the <u>node</u> where the pod is running, the pod will also fail. This means that you will _have to create all the pods again_, even if the pod becomes healthy.
+To make life considerably easier, instead of managing all of the pods manually, you can make a _workload resource_ that manages the set of pods for you. These resources configure [[#Controllers]] that make sure the right number of the right kind of pod are running, to match the specified state.
+### Built-In Workloads
+- <u>Deployment and ReplicaSet</u> -> Deployment is a good fit for managing a stateless application workload on your cluster, where any pod in the deployment is interchangeable and can be replaced if needed
+- <u>StatefulSet</u> -> Let's you run one or more related Pods that do track state somehow. For example, if your workload records data persistently, you can run a StateFul set that matches each pod with a PersistentVolume. Your code, running in the Pods for that StatefulSet, can replicate data to other pods in the same StatefulSet to improve overall resilience. 
+- <u>DaemonSet</u> -> defines a pod that provide facilities local to the node, every time you add a node to the cluster, that matches the specification in a daemon set, the control plane, schedules a pod for that daemon set, onto the new node. Each pod in a DaemonSet, performs a job similar to the daemon on a UNIX / POSIX server. A DaemonSet might be fundamental to the operation of your cluster, such as plugin to run cluster networking, it might help you to manage the node, or it could provide optional behavior that enforces the container platform you are running.
+- <u>Job and CronJob</u> -> Provides different ways to define tasks that run to completion and then stop. You can use a job to define a task that runs to completion just once, you can use cronjob to run the same job multiple times accroding to schedule.
+## Controllers
+_In robotics and automation, a control loop is a non-terminating loop that regulates the state of a system._
+For example, a thermostat in a room when setting a temperature we define a a 'desired state' and the current temperature is the 'current state' the thermostat turns the heating equipment on and off until the current state is the desired state.
+In kubernetes, controllers are control loops that watch the state of the cluster, then they make or request changes where needed. Each controller tries to move the current cluster state closer to the desired state.
+### Controller Pattern
+A controller tracks at least one kubernetes resource type. These objects have a spec field that represents the desired state. The controller(s) for that resource are responsible for making the current state to come closer to the desired state. The controller might carry the action out itself; more commonly, in Kubernetes, a controller will send message to API server, that have useful side effects. 
+#### Controller via API
+
+# Kubernetes API Architecture
+![[Pasted image 20250310150801.png]]
+To apply configuration to a node, this command is applied ->
+```
+kubectl apply -f my.yaml
+```
+_but what is actually happening on the background_
 
