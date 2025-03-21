@@ -11,14 +11,12 @@
             "id": "7e4c367d9fa6f18c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "Computers/Writing Rust OS.md",
-                "mode": "source",
-                "source": false
+                "file": "Images/Pasted image 20250310150801.png"
               },
-              "icon": "lucide-file",
-              "title": "Writing Rust OS"
+              "icon": "lucide-image",
+              "title": "Pasted image 20250310150801"
             }
           }
         ]
@@ -181,13 +179,13 @@
   },
   "active": "7e4c367d9fa6f18c",
   "lastOpenFiles": [
+    "Computers/Writing Rust OS.md",
     "Infrastructure/Containers/OpenShift & Kubrenets.md",
-    "Pasted image 20250310150801.png",
+    "Images/Pasted image 20250310150801.png",
     "Computers/System Mechanisms.md",
     "Computers/From Transistors to A Computer.md",
     "Computers/Practical Malware Analysis.md",
     "Computers/Windows Kernel.md",
-    "Computers/Writing Rust OS.md",
     "Computers/Assembly.md",
     "Exercises/Pwnable/Toddler's Bottle/7. Input.md",
     "exploit.c",
